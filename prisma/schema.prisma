@@ -28,8 +28,49 @@ model Pet {
   birthday       String
   gotchaDate     String
   active         Boolean  @default(true)
-  primaryOwnerId String
-  primaryOwner   User     @relation(fields: [primaryOwnerId], references: [id], onDelete: Cascade)
+  primaryOwnerId String?
+  primaryOwner   User?     @relation(fields: [primaryOwnerId], references: [id], onDelete: SetNull)
+  medicines Medicine[]
+}
+
+model Medicine { 
+  id String @id @default(cuid())
+  name String 
+  quantity Int
+  unit String 
+  notes Boolean @default(false)
+  photos Boolean @default(false)
+  createdAt DateTime @default(now())
+  petId String? 
+  pet Pet? @relation(fields: [petId], references: [id])
+  medicineDosages MedicineDosage[]
+}
+
+model MedicineDosage { 
+  id String @id @default(cuid())
+  quantity Int
+  unit String 
+  medicineId String? 
+  medicine Medicine? @relation(fields: [medicineId], references: [id])
+  medicineFrequency MedicineFrequency[]
+}
+
+model MedicineFrequency { 
+  id String @id @default(cuid())
+  quantity Int
+  unit String 
+  dosageId String? 
+  medicineDosage MedicineDosage? @relation(fields: [dosageId], references: [id])
+  medicineSchedule MedicineSchedule[]
+}
+
+model MedicineSchedule { 
+  id String @id @default(cuid())
+  hour Int 
+  minute Int
+  timeOfDay TimeOfDay
+  frequencyId String? 
+  medicineFrequency MedicineFrequency? @relation(fields: [frequencyId], references: [id])
 }
 
 enum AppearanceMode {
@@ -40,4 +81,9 @@ enum AppearanceMode {
 enum Type {
   CAT
   DOG
+}
+
+enum TimeOfDay {
+  AM 
+  PM
 }
