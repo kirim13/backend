@@ -1,5 +1,5 @@
 import db from "../utils/db.server";
-import type { User } from "../user/service";
+// import type { User } from "./userService";
 import { Type } from "@prisma/client";
 
 const date: Date = new Date();
@@ -10,6 +10,15 @@ const formattedDate: string = date.toLocaleDateString("en-US", {
 });
 // Format: MM/DD/YYYY
 
+type ShortPet = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  breed: string;
+  type: Type;
+};
+
+/*
 type Pet = {
   id: string;
   firstName: string;
@@ -21,6 +30,7 @@ type Pet = {
   active: boolean;
   primaryOwner: User;
 };
+*/
 
 type PetOwner = {
   id: string;
@@ -34,7 +44,7 @@ type PetOwner = {
   primaryOwnerId: string;
 };
 
-const listPets = async (): Promise<Pet[]> => {
+const listPets = async (): Promise<ShortPet[]> => {
   return db.pet.findMany({
     select: {
       id: true,
@@ -42,23 +52,17 @@ const listPets = async (): Promise<Pet[]> => {
       lastName: true,
       breed: true,
       type: true,
-      birthday: true,
-      gotchaDate: true,
-      active: true,
       primaryOwner: {
         select: {
-          id: true,
           firstName: true,
           lastName: true,
-          email: true,
-          password: true,
         },
       },
     },
   });
 };
 
-const getPet = async (id: string): Promise<Pet | null> => {
+const getPet = async (id: string) => {
   return db.pet.findUnique({
     where: {
       id,
@@ -81,11 +85,12 @@ const getPet = async (id: string): Promise<Pet | null> => {
           password: true,
         },
       },
+      medicines: true,
     },
   });
 };
 
-const createPet = async (pet: PetOwner): Promise<Pet> => {
+const createPet = async (pet: PetOwner) => {
   const {
     firstName,
     lastName,
@@ -127,4 +132,12 @@ const createPet = async (pet: PetOwner): Promise<Pet> => {
   });
 };
 
-export { listPets, getPet, createPet };
+const deletePet = async (id: string) => {
+  return db.pet.delete({
+    where: {
+      id,
+    },
+  });
+};
+
+export { listPets, getPet, createPet, deletePet };

@@ -1,15 +1,23 @@
 import "dotenv/config";
 import express from "express";
-import cors from "cors";
+import corsMiddleware from "./middlewares/cors";
+import loggerMiddleware from "./middlewares/logger";
+import errorHandler from "./middlewares/errorHandler";
 
-import { userRouter } from "./user/router";
-import { petRouter } from "./pet/router";
+import { userRouter } from "./routes/userRoutes";
+import { petRouter } from "./routes/petRoutes";
+import { medicineRouter } from "./routes/medicineRoutes";
 
 const app = express();
 
-app.use(cors());
+app.use(corsMiddleware);
+app.use(loggerMiddleware);
 app.use(express.json());
+
 app.use("/users", userRouter);
 app.use("/pets", petRouter);
+app.use("/medicines", medicineRouter);
+
+app.use(errorHandler);
 
 export default app;
