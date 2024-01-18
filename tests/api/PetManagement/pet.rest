@@ -1,14 +1,14 @@
 ### Description: Retrieve all pets
 ## Request
-GET http://localhost:3000/pets
+GET http://localhost:3001/pets
 
 ### Description: Retrieve pet via user id 
 ## Request 
-GET http://localhost:3000/pets/clriem4ix0000b5299oqa4ej3
+GET http://localhost:3001/pets/clrjqerr70009ai5iejju6hcl
 
 ### Description: Create pet 
 ## Request 
-POST http://localhost:3000/pets 
+POST http://localhost:3001/pets 
 ## Response 
 content-type: application/json
 
@@ -19,12 +19,12 @@ content-type: application/json
     "type": "CAT", 
     "birthday": "02-12-2013", 
     "gotchaDate": "02-12-2013", 
-    "primaryOwnerId": "clriggnsy0005y4nfth9471du"
+    "primaryOwnerId": "clrjrf2px0000127xhkcxptvu"
 }
 
 ### Description: Update pet via id 
 ## Request 
-PUT http://localhost:3000/pets/clriem4ix0000b5299oqa4ej3
+PUT http://localhost:3001/pets/clriem4ix0000b5299oqa4ej3
 ## Response
 content-type: application/json
 
@@ -40,4 +40,4 @@ content-type: application/json
 
 ### Description: Delete pet via id 
 ## Request
-DELETE http://localhost:3000/pets/clriiv6ex0006a38u278cez0u
+DELETE http://localhost:3001/pets/clrjrfcvu0002127xqnijbtcr

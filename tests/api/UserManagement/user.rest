@@ -1,14 +1,14 @@
 ### Description: Retrieve all users 
 ## Request
-GET http://localhost:3000/users
+GET http://localhost:3001/users
 
 ### Description: Retrieve user via id 
 ## Request 
-GET http://localhost:3000/users/clriem4ix0000b5299oqa4ej3
+GET http://localhost:3001/users/clriem4ix0000b5299oqa4ej3
 
 ### Description: Create user 
 ## Request 
-POST http://localhost:3000/users 
+POST http://localhost:3001/users 
 ## Response 
 content-type: application/json
 
@@ -21,7 +21,7 @@ content-type: application/json
 
 ### Description: Update user via id 
 ## Request 
-PUT http://localhost:3000/users/clriem4ix0000b5299oqa4ej3
+PUT http://localhost:3001/users/clriem4ix0000b5299oqa4ej3
 ## Response
 content-type: application/json
 
@@ -34,4 +34,4 @@ content-type: application/json
 
 ### Description: Delete user via id 
 ## Request
-DELETE http://localhost:3000/users/clriggnsy0005y4nfth9471du
+DELETE http://localhost:3001/users/clriwe1ya0002ai5izzq7if7h
