@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Pet" ALTER COLUMN "birthday" SET DATA TYPE TEXT,
+ALTER COLUMN "gotchaDate" SET DATA TYPE TEXT;

@@ -1,0 +1,37 @@
+### Description: Retrieve all users 
+## Request
+GET http://localhost:3000/users
+
+### Description: Retrieve user via id 
+## Request 
+GET http://localhost:3000/users/clriem4ix0000b5299oqa4ej3
+
+### Description: Create user 
+## Request 
+POST http://localhost:3000/users 
+## Response 
+content-type: application/json
+
+{
+    "firstName": "John1",
+    "lastName": "Smithy2",
+    "email": "johnsmith12@example.com",
+    "password": "password"
+}
+
+### Description: Update user via id 
+## Request 
+PUT http://localhost:3000/users/clriem4ix0000b5299oqa4ej3
+## Response
+content-type: application/json
+
+{
+    "firstName": "Joe",
+    "lastName": "Smith",
+    "email": "joesmith@example.com",
+    "password": "password"
+}
+
+### Description: Delete user via id 
+## Request
+DELETE http://localhost:3000/users/clriggnsy0005y4nfth9471du

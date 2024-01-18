@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String         @id @default(cuid())
+  firstName      String
+  lastName       String
+  email          String         @unique
+  password       String
+  passwordMatch  Boolean        @default(false)
+  createdAt      DateTime       @default(now())
+  appearanceMode AppearanceMode @default(LIGHT)
+  pets           Pet[]
+}
+
+model Pet {
+  id             String   @id @default(cuid())
+  firstName      String
+  lastName       String
+  breed          String
+  type           Type
+  birthday       String
+  gotchaDate     String
+  active         Boolean  @default(true)
+  primaryOwnerId String
+  primaryOwner   User     @relation(fields: [primaryOwnerId], references: [id], onDelete: Cascade)
+}
+
+enum AppearanceMode {
+  LIGHT
+  DARK
+}
+
+enum Type {
+  CAT
+  DOG
+}
