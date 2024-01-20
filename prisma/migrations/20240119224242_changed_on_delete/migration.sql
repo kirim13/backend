@@ -25,6 +25,9 @@ ALTER TABLE "MedicineFrequency" ALTER COLUMN "dosageId" DROP NOT NULL;
 -- AlterTable
 ALTER TABLE "MedicineSchedule" ALTER COLUMN "frequencyId" DROP NOT NULL;
 
+-- AlterTable
+ALTER TABLE "Pet" ALTER COLUMN "primaryOwnerId" DROP NOT NULL;
+
 -- AddForeignKey
 ALTER TABLE "Pet" ADD CONSTRAINT "Pet_primaryOwnerId_fkey" FOREIGN KEY ("primaryOwnerId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
