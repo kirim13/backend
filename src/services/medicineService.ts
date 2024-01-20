@@ -2,9 +2,7 @@ import db from "../utils/db.server";
 
 type Medicine = {
   name: string;
-  quantity: number;
   unit: string;
-  petId: string;
 };
 
 const listMedicines = async () => {
@@ -12,20 +10,7 @@ const listMedicines = async () => {
     select: {
       id: true,
       name: true,
-      quantity: true,
       unit: true,
-      pet: {
-        select: {
-          firstName: true,
-          lastName: true,
-          primaryOwner: {
-            select: {
-              firstName: true,
-              lastName: true,
-            },
-          },
-        },
-      },
     },
   });
 };
@@ -35,60 +20,37 @@ const getMedicine = async (id: string) => {
     where: {
       id,
     },
-    include: {
-      pet: {
-        select: {
-          firstName: true,
-          lastName: true,
-          primaryOwner: {
-            select: {
-              firstName: true,
-              lastName: true,
-            },
-          },
-        },
-      },
-    },
   });
 };
 
-//eslint-disable-next-line
 const createMedicine = async (medicine: Medicine) => {
-  const { name, quantity, unit, petId } = medicine;
+  const { name, unit } = medicine;
   return db.medicine.create({
     data: {
       name,
-      quantity,
       unit,
-      petId,
-    },
-    select: {
-      name: true,
-      quantity: true,
-      unit: true,
-      petId: true,
     },
   });
 };
 
 const updateMedicine = async (id: string, medicine: Medicine) => {
-  const { name, quantity, unit, petId } = medicine;
+  const { name, unit } = medicine;
   return db.medicine.update({
     where: {
       id,
     },
     data: {
       name,
-      quantity,
       unit,
-      petId,
     },
   });
 };
 
 const deleteMedicine = async (id: string) => {
   return db.medicine.delete({
-    where: { id },
+    where: {
+      id,
+    },
   });
 };
 

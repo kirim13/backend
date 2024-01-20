@@ -65,9 +65,11 @@ const updateUser = async (
   });
 };
 
-const deleteUser = async (id: string): Promise<User | null> => {
+const deleteUser = async (id: string) => {
   return db.user.delete({
-    where: { id },
+    where: {
+      id,
+    },
   });
 };
 

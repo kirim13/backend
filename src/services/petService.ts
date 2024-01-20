@@ -85,7 +85,6 @@ const getPet = async (id: string) => {
           password: true,
         },
       },
-      medicines: true,
     },
   });
 };
@@ -132,6 +131,35 @@ const createPet = async (pet: PetOwner) => {
   });
 };
 
+//eslint-disable-next-line
+const updatePet = async (id: string, petData: any) => {
+  const {
+    firstName,
+    lastName,
+    breed,
+    type,
+    birthday,
+    gotchaDate,
+    active,
+    primaryOwnerId,
+  } = petData;
+  return db.pet.update({
+    where: {
+      id,
+    },
+    data: {
+      firstName,
+      lastName,
+      breed,
+      type,
+      birthday,
+      gotchaDate,
+      active,
+      primaryOwnerId,
+    },
+  });
+};
+
 const deletePet = async (id: string) => {
   return db.pet.delete({
     where: {
@@ -140,4 +168,4 @@ const deletePet = async (id: string) => {
   });
 };
 
-export { listPets, getPet, createPet, deletePet };
+export { listPets, getPet, createPet, updatePet, deletePet };
