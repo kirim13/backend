@@ -42,7 +42,7 @@ userRouter.post(
     try {
       const createdUser = await userService.createUser(user);
       return res.status(200).json({
-        message: `${createdUser.firstName} ${createdUser.lastName} was successfully created`,
+        message: `Created ${createdUser.firstName} ${createdUser.lastName} successfully`,
       });
       //eslint-disable-next-line
     } catch (err: any) {
@@ -55,13 +55,13 @@ userRouter.post(
 userRouter.put(
   "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
-    const id: string = req.params.id;
+    const { id } = req.params;
     const user = req.body;
     try {
       const updatedUser = await userService.updateUser(id, user);
       if (updatedUser) {
         return res.status(200).json({
-          message: `${updatedUser.firstName} ${updatedUser.lastName} was successfully updated`,
+          message: `Updated ${updatedUser.firstName} ${updatedUser.lastName} successfully`,
         });
       }
       throw Error(`Cannot find user with id:${id}`);
@@ -76,15 +76,15 @@ userRouter.put(
 userRouter.delete(
   "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
-    const id: string = req.params.id;
+    const { id } = req.params;
     try {
       const user = await userService.deleteUser(id);
       if (user) {
         return res.status(200).json({
-          message: `${user.firstName} ${user.lastName} was successfully deleted`,
+          message: `Deleted ${user.firstName} ${user.lastName} successfully`,
         });
       }
-      throw Error(`Cannot find user with id:${id}`);
+      throw new Error(`Cannot find user with id:${id}`);
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);

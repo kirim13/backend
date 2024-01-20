@@ -41,9 +41,12 @@ medicineRouter.get(
 medicineRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
+    const medicine = req.body;
     try {
-      const createdMedicine = await medicineService.createMedicine(req.body);
-      return res.status(200).json(createdMedicine);
+      const createdMedicine = await medicineService.createMedicine(medicine);
+      return res
+        .status(200)
+        .json(`Successfully created ${createdMedicine.name}`);
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);
@@ -57,9 +60,6 @@ medicineRouter.put(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     const medicine = req.body;
-    if (!medicine.petId) {
-      throw new Error(`Cannot find pet with id:${medicine.petId}`);
-    }
     try {
       const updatedMedicine = await medicineService.updateMedicine(
         id,
@@ -80,19 +80,20 @@ medicineRouter.put(
 
 // Delete: Delete Medicine via ID
 medicineRouter.delete(
-  ":/id",
+  "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      const deletedMedicine = await medicineService.deleteMedicine(id);
-      if (deletedMedicine) {
+      const medicine = await medicineService.deleteMedicine(id);
+      if (medicine) {
         return res
           .status(200)
-          .json(`Deleted medicine ${deletedMedicine.name} successfully`);
+          .json({ message: `Deleted ${medicine.name} successfully` });
       }
       throw new Error(`Delete medicine with id:${id} failed`);
       //eslint-disable-next-line
     } catch (err: any) {
+      console.log(err.message);
       next(err);
     }
   }

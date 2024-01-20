@@ -50,6 +50,26 @@ petRouter.post("/", async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+// UPDATE: Update pet via id
+petRouter.put(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const petData = req.body;
+    try {
+      const pet = await petService.updatePet(id, petData);
+      if (pet) {
+        return res.status(200).json({
+          message: `Updated ${pet.firstName} ${pet.lastName} pet successfully`,
+        });
+      }
+      throw new Error(`Failed to update pet with id:${id}`);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 // DELETE: Delete pet via id
 petRouter.delete(
   "/:id",
