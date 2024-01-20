@@ -15,7 +15,7 @@ content-type: application/json
 {
     "firstName": "John1",
     "lastName": "Smithy2",
-    "email": "johnsmith12@example.com",
+    "email": "johnsmith1@example.com",
     "password": "password"
 }
 
@@ -34,4 +34,4 @@ content-type: application/json
 
 ### Description: Delete user via id 
 ## Request
-DELETE http://localhost:3001/users/clriwe1ya0002ai5izzq7if7h
+DELETE http://localhost:3001/users/clrlbn1kk00004dkbptu7t9rm

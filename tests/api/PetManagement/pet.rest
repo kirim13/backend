@@ -19,7 +19,7 @@ content-type: application/json
     "type": "CAT", 
     "birthday": "02-12-2013", 
     "gotchaDate": "02-12-2013", 
-    "primaryOwnerId": "clrjrf2px0000127xhkcxptvu"
+    "primaryOwnerId": "clrl88tbb00005rq50gih7znl"
 }
 
 ### Description: Update pet via id 
@@ -40,4 +40,4 @@ content-type: application/json
 
 ### Description: Delete pet via id 
 ## Request
-DELETE http://localhost:3001/pets/clrjrfcvu0002127xqnijbtcr
+DELETE http://localhost:3001/pets/clrl8971b00025rq5rioty57l
