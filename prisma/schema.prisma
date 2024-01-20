@@ -29,48 +29,40 @@ model Pet {
   gotchaDate     String
   active         Boolean  @default(true)
   primaryOwnerId String?
-  primaryOwner   User?     @relation(fields: [primaryOwnerId], references: [id], onDelete: SetNull)
-  medicines Medicine[]
+  primaryOwner   User?     @relation(fields: [primaryOwnerId], references: [id], onDelete: Cascade)
+  registeredMedicine RegisteredMedicine[]
 }
 
 model Medicine { 
   id String @id @default(cuid())
   name String 
-  quantity Int
   unit String 
   notes Boolean @default(false)
   photos Boolean @default(false)
   createdAt DateTime @default(now())
-  petId String? 
-  pet Pet? @relation(fields: [petId], references: [id])
-  medicineDosages MedicineDosage[]
+  medicineDosages MedicineDetails[]
 }
 
-model MedicineDosage { 
+model MedicineDetails { 
   id String @id @default(cuid())
-  quantity Int
-  unit String 
-  medicineId String? 
-  medicine Medicine? @relation(fields: [medicineId], references: [id])
-  medicineFrequency MedicineFrequency[]
-}
-
-model MedicineFrequency { 
-  id String @id @default(cuid())
-  quantity Int
-  unit String 
-  dosageId String? 
-  medicineDosage MedicineDosage? @relation(fields: [dosageId], references: [id])
-  medicineSchedule MedicineSchedule[]
-}
-
-model MedicineSchedule { 
-  id String @id @default(cuid())
-  hour Int 
+  dosageQuantity Int
+  dosageUnit String 
+  frequencyQuantity Int
+  frequencyUnit String 
+  hour Int
   minute Int
   timeOfDay TimeOfDay
-  frequencyId String? 
-  medicineFrequency MedicineFrequency? @relation(fields: [frequencyId], references: [id])
+  medicineId String? 
+  medicine Medicine? @relation(fields: [medicineId], references: [id], onDelete: Cascade)
+  registeredMedicine RegisteredMedicine[]
+}
+
+model RegisteredMedicine {
+  id String @id @default(cuid())
+  petId String?
+  pet Pet? @relation(fields: [petId], references: [id], onDelete: Cascade)
+  medicineDetailsId String? 
+  medicineDetails MedicineDetails? @relation(fields: [medicineDetailsId], references: [id], onDelete: Cascade)
 }
 
 enum AppearanceMode {
