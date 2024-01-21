@@ -2,12 +2,7 @@ import db from "../utils/db.server";
 
 const getAllMedicineDetails = async () => {
   return db.medicineDetail.findMany({
-    select: {
-      id: true,
-      dosageQuantity: true,
-      dosageUnit: true,
-      frequencyQuantity: true,
-      frequencyUnit: true,
+    include: {
       medicine: {
         select: {
           name: true,
@@ -26,9 +21,6 @@ const getAllMedicineDetailsViaId = async (medicineId: string) => {
       dosageUnit: true,
       frequencyQuantity: true,
       frequencyUnit: true,
-      hour: true,
-      minute: true,
-      timeOfDay: true,
     },
   });
 };
@@ -48,9 +40,6 @@ const createMedicineDetail = async (medicineDetails: any) => {
     dosageUnit,
     frequencyQuantity,
     frequencyUnit,
-    hour,
-    minute,
-    timeOfDay,
     medicineId,
   } = medicineDetails;
   return db.medicineDetail.create({
@@ -59,9 +48,6 @@ const createMedicineDetail = async (medicineDetails: any) => {
       dosageUnit,
       frequencyQuantity,
       frequencyUnit,
-      hour,
-      minute,
-      timeOfDay,
       medicine: { connect: { id: medicineId } },
     },
   });
@@ -74,9 +60,6 @@ const updateMedicineDetail = async (id: string, medicineDetails: any) => {
     dosageUnit,
     frequencyQuantity,
     frequencyUnit,
-    hour,
-    minute,
-    timeOfDay,
     medicineId,
   } = medicineDetails;
   return db.medicineDetail.update({
@@ -88,9 +71,6 @@ const updateMedicineDetail = async (id: string, medicineDetails: any) => {
       dosageUnit,
       frequencyQuantity,
       frequencyUnit,
-      hour,
-      minute,
-      timeOfDay,
       medicine: { connect: { id: medicineId } },
     },
   });

@@ -2,6 +2,7 @@ import db from "../utils/db.server";
 
 type Medicine = {
   name: string;
+  quantity: number;
   unit: string;
 };
 
@@ -25,23 +26,25 @@ const getMedicine = async (id: string) => {
 };
 
 const createMedicine = async (medicine: Medicine) => {
-  const { name, unit } = medicine;
+  const { name, quantity, unit } = medicine;
   return db.medicine.create({
     data: {
       name,
+      quantity,
       unit,
     },
   });
 };
 
 const updateMedicine = async (id: string, medicine: Medicine) => {
-  const { name, unit } = medicine;
+  const { name, quantity, unit } = medicine;
   return db.medicine.update({
     where: {
       id,
     },
     data: {
       name,
+      quantity,
       unit,
     },
   });

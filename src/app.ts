@@ -8,6 +8,8 @@ import { userRouter } from "./routes/userRoutes";
 import { petRouter } from "./routes/petRoutes";
 import { medicineRouter } from "./routes/medicineRoutes";
 import { medicineDetailRouter } from "./routes/medicineDetailRoutes";
+import { medicineNotificationRouter } from "./routes/medicineNotificationRoutes";
+import { registeredMedicineRouter } from "./routes/registeredMedicineRoutes";
 
 const app = express();
 
@@ -19,6 +21,8 @@ app.use("/users", userRouter);
 app.use("/pets", petRouter);
 app.use("/medicines", medicineRouter);
 app.use("/medicineDetails", medicineDetailRouter);
+app.use("/medicineNotifications", medicineNotificationRouter);
+app.use("/registeredMedicine", registeredMedicineRouter);
 
 app.use(errorHandler);
 
