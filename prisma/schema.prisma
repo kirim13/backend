@@ -36,6 +36,7 @@ model Pet {
 model Medicine { 
   id String @id @default(cuid())
   name String 
+  quantity Int 
   unit String 
   notes Boolean @default(false)
   photos Boolean @default(false)
@@ -45,11 +46,10 @@ model Medicine {
 
 model MedicineDetail { 
   id String @id @default(cuid())
-  dosageQuantity Int
-  dosageUnit String 
+  dosageQuantity Int?
+  dosageUnit String? 
   frequencyQuantity Int
-  frequencyUnit String 
-  repeating Repeating? 
+  frequencyUnit FrequencyUnit 
   medicineId String? 
   medicine Medicine? @relation(fields: [medicineId], references: [id], onDelete: Cascade)
   medicineNotification MedicineNotification[]
@@ -61,7 +61,8 @@ model MedicineNotification {
   hour Int
   minute Int
   timeOfDay TimeOfDay
-  endDate DateTime? 
+  endDate String? 
+  repeating Repeating? 
   createdAt DateTime @default(now())
   medicineDetailId String? 
   medicineDetail MedicineDetail? @relation(fields: [medicineDetailId], references: [id], onDelete: Cascade)
@@ -89,6 +90,15 @@ enum Type {
 enum TimeOfDay {
   AM 
   PM
+}
+
+enum FrequencyUnit {
+  DAY 
+  WEEK 
+  BIWEEKLY 
+  MONTH
+  BIMONTHLY 
+  QUARTERLY
 }
 
 enum Repeating {
