@@ -1,6 +1,5 @@
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
-
 import * as medicineService from "../services/medicineService";
 
 export const medicineRouter = express.Router();

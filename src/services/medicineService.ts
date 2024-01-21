@@ -11,6 +11,7 @@ const listMedicines = async () => {
       id: true,
       name: true,
       unit: true,
+      medicineDetail: true,
     },
   });
 };

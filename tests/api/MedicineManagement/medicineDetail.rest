@@ -1,0 +1,49 @@
+### Definition: List all medicineDetails
+## Request 
+GET http://localhost:3001/medicineDetails
+
+### Definition: List all medicineDetails via medicineId
+## Request 
+GET http://localhost:3001/medicineDetails/clrml73zj0000gv0c3bzzwj0y
+
+### Definition: List medicineDetails via id 
+## Request 
+GET http://localhost:3001/medicineDetails/clrlb5jen0000t2gx0nmybncc
+
+### Definition: Create medicineDetails  
+## Request 
+POST http://localhost:3001/medicineDetails 
+## Response 
+content-type: application/json
+
+{
+    "dosageQuantity": 1,
+    "dosageUnit": "mg",
+    "frequencyQuantity": 2,
+    "frequencyUnit": "weeks",
+    "hour": 2,
+    "minute": 1,
+    "timeOfDay": "AM",
+    "medicineId": "clrml73zj0000gv0c3bzzwj0y"
+}
+
+### Definition: Update medicineDetails via id
+## Request 
+PUT http://localhost:3001/medicineDetails/clrmodkgb000168ojmllgmham
+## Response 
+content-type: application/json
+
+{
+    "dosageQuantity": 1,
+    "dosageUnit": "mg",
+    "frequencyQuantity": 2,
+    "frequencyUnit": "weeks",
+    "hour": 2,
+    "minute": 1,
+    "timeOfDay": "AM",
+    "medicineId": "clrmoepka0000921njwk0fep0"
+}
+
+### Definition: Delete medicineDetails via id  
+## Request 
+DELETE http://localhost:3001/medicineDetails/clrmmkwid0002wwyn0vmnopg4

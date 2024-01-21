@@ -40,20 +40,31 @@ model Medicine {
   notes Boolean @default(false)
   photos Boolean @default(false)
   createdAt DateTime @default(now())
-  medicineDosages MedicineDetails[]
+  medicineDetail MedicineDetail[]
 }
 
-model MedicineDetails { 
+model MedicineDetail { 
   id String @id @default(cuid())
   dosageQuantity Int
   dosageUnit String 
   frequencyQuantity Int
   frequencyUnit String 
+  repeating Repeating? 
+  medicineId String? 
+  medicine Medicine? @relation(fields: [medicineId], references: [id], onDelete: Cascade)
+  medicineNotification MedicineNotification[]
+}
+
+model MedicineNotification {
+  id String @id @default(cuid())
+  day String? 
   hour Int
   minute Int
   timeOfDay TimeOfDay
-  medicineId String? 
-  medicine Medicine? @relation(fields: [medicineId], references: [id], onDelete: Cascade)
+  endDate DateTime? 
+  createdAt DateTime @default(now())
+  medicineDetailId String? 
+  medicineDetail MedicineDetail? @relation(fields: [medicineDetailId], references: [id], onDelete: Cascade)
   registeredMedicine RegisteredMedicine[]
 }
 
@@ -61,8 +72,8 @@ model RegisteredMedicine {
   id String @id @default(cuid())
   petId String?
   pet Pet? @relation(fields: [petId], references: [id], onDelete: Cascade)
-  medicineDetailsId String? 
-  medicineDetails MedicineDetails? @relation(fields: [medicineDetailsId], references: [id], onDelete: Cascade)
+  medicineNotificationId String? 
+  medicineNotification MedicineNotification? @relation(fields: [medicineNotificationId], references: [id], onDelete: Cascade)
 }
 
 enum AppearanceMode {
@@ -78,4 +89,13 @@ enum Type {
 enum TimeOfDay {
   AM 
   PM
+}
+
+enum Repeating {
+  DAILY
+  WEEKLY 
+  BIWEEKLY 
+  MONTHLY 
+  BIMONTHLY
+  QUARTERLY
 }

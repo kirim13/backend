@@ -1,7 +1,26 @@
 import db from "../utils/db.server";
 
 const getAllMedicineDetails = async () => {
-  return db.medicineDetails.findMany({
+  return db.medicineDetail.findMany({
+    select: {
+      id: true,
+      dosageQuantity: true,
+      dosageUnit: true,
+      frequencyQuantity: true,
+      frequencyUnit: true,
+      medicine: {
+        select: {
+          name: true,
+          unit: true,
+        },
+      },
+    },
+  });
+};
+
+const getAllMedicineDetailsViaId = async (medicineId: string) => {
+  return db.medicineDetail.findMany({
+    where: { medicineId },
     select: {
       dosageQuantity: true,
       dosageUnit: true,
@@ -15,7 +34,7 @@ const getAllMedicineDetails = async () => {
 };
 
 const getMedicineDetails = async (id: string) => {
-  return db.medicineDetails.findUnique({
+  return db.medicineDetail.findUnique({
     where: {
       id,
     },
@@ -23,7 +42,7 @@ const getMedicineDetails = async (id: string) => {
 };
 
 //eslint-disable-next-line
-const createMedicineDetails = async (medicineDetails: any) => {
+const createMedicineDetail = async (medicineDetails: any) => {
   const {
     dosageQuantity,
     dosageUnit,
@@ -34,7 +53,7 @@ const createMedicineDetails = async (medicineDetails: any) => {
     timeOfDay,
     medicineId,
   } = medicineDetails;
-  return db.medicineDetails.create({
+  return db.medicineDetail.create({
     data: {
       dosageQuantity,
       dosageUnit,
@@ -43,13 +62,13 @@ const createMedicineDetails = async (medicineDetails: any) => {
       hour,
       minute,
       timeOfDay,
-      medicineId,
+      medicine: { connect: { id: medicineId } },
     },
   });
 };
 
 //eslint-disable-next-line
-const updateMedicineDetails = async (id: string, medicineDetails: any) => {
+const updateMedicineDetail = async (id: string, medicineDetails: any) => {
   const {
     dosageQuantity,
     dosageUnit,
@@ -58,8 +77,9 @@ const updateMedicineDetails = async (id: string, medicineDetails: any) => {
     hour,
     minute,
     timeOfDay,
+    medicineId,
   } = medicineDetails;
-  return db.medicineDetails.update({
+  return db.medicineDetail.update({
     where: {
       id,
     },
@@ -71,12 +91,13 @@ const updateMedicineDetails = async (id: string, medicineDetails: any) => {
       hour,
       minute,
       timeOfDay,
+      medicine: { connect: { id: medicineId } },
     },
   });
 };
 
-const deleteMedicineDetails = async (id: string) => {
-  return db.medicineDetails.delete({
+const deleteMedicineDetail = async (id: string) => {
+  return db.medicineDetail.delete({
     where: {
       id,
     },
@@ -85,8 +106,9 @@ const deleteMedicineDetails = async (id: string) => {
 
 export {
   getAllMedicineDetails,
+  getAllMedicineDetailsViaId,
   getMedicineDetails,
-  createMedicineDetails,
-  updateMedicineDetails,
-  deleteMedicineDetails,
+  createMedicineDetail,
+  updateMedicineDetail,
+  deleteMedicineDetail,
 };

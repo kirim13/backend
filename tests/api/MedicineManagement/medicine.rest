@@ -4,7 +4,7 @@ GET http://localhost:3001/medicines
 
 ### Definition: List medicine via id 
 ## Request 
-GET http://localhost:3001/medicines/clrlb5jen0000t2gx0nmybncc
+GET http://localhost:3001/medicines/clrml73zj0000gv0c3bzzwj0y
 
 ### Definition: Create medicine  
 ## Request 
@@ -30,4 +30,4 @@ content-type: application/json
 
 ### Definition: Delete medicine via id  
 ## Request 
-DELETE http://localhost:3001/medicines/clrlb5jen0000t2gx0nmybncc
+DELETE http://localhost:3001/medicines/clrlxjcm70000k59g43phb4oo

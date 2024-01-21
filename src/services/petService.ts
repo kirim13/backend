@@ -107,7 +107,7 @@ const createPet = async (pet: PetOwner) => {
       type,
       birthday,
       gotchaDate,
-      primaryOwnerId,
+      primaryOwner: { connect: { id: primaryOwnerId } },
     },
     select: {
       id: true,
@@ -155,7 +155,7 @@ const updatePet = async (id: string, petData: any) => {
       birthday,
       gotchaDate,
       active,
-      primaryOwnerId,
+      primaryOwner: { connect: { id: primaryOwnerId } },
     },
   });
 };

@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/users", userRouter);
 app.use("/pets", petRouter);
 app.use("/medicines", medicineRouter);
-app.use("medicineDetail", medicineDetailRouter);
+app.use("/medicineDetails", medicineDetailRouter);
 
 app.use(errorHandler);
 

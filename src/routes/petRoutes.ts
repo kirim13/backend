@@ -1,6 +1,5 @@
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
-
 import * as petService from "../services/petService";
 
 export const petRouter = express.Router();

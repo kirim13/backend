@@ -1,6 +1,5 @@
 import express from "express";
 import type { NextFunction, Request, Response } from "express";
-
 import * as medicineDetailServices from "../services/medicineDetailService";
 
 export const medicineDetailRouter = express.Router();
@@ -10,13 +9,40 @@ medicineDetailRouter.get(
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const medicines = await medicineDetailServices.getAllMedicineDetails();
-
       if (medicines.length === 0) {
-        return res.status(400).json({ error: "No registered medicines" });
+        return res
+          .status(400)
+          .json({ error: "No registered medicine details" });
       } else if (medicines) {
         return res.status(200).json(medicines);
       } else
         return res.status(400).json({ error: "Failed to get all medicines" });
+      //eslint-disable-next-line
+    } catch (err: any) {
+      next(err);
+    }
+  }
+);
+
+medicineDetailRouter.get(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { medicineId } = req.params;
+    try {
+      const medicines = await medicineDetailServices.getAllMedicineDetailsViaId(
+        medicineId
+      );
+
+      if (medicines.length === 0) {
+        return res.status(400).json({
+          error: `No registered medicine details for medicine with id:${medicineId}`,
+        });
+      } else if (medicines) {
+        return res.status(200).json(medicines);
+      } else
+        return res.status(400).json({
+          error: `Failed to get all medicine details for medicine with id:${medicineId}`,
+        });
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);
@@ -48,7 +74,7 @@ medicineDetailRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     const medicineData = req.body;
     try {
-      const medicine = await medicineDetailServices.createMedicineDetails(
+      const medicine = await medicineDetailServices.createMedicineDetail(
         medicineData
       );
       if (medicine) {
@@ -70,7 +96,7 @@ medicineDetailRouter.put(
     const { id } = req.params;
     const medicineData = req.body;
     try {
-      const medicine = await medicineDetailServices.updateMedicineDetails(
+      const medicine = await medicineDetailServices.updateMedicineDetail(
         id,
         medicineData
       );
@@ -94,7 +120,7 @@ medicineDetailRouter.delete(
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
     try {
-      const medicine = await medicineDetailServices.deleteMedicineDetails(id);
+      const medicine = await medicineDetailServices.deleteMedicineDetail(id);
       if (medicine) {
         return res
           .status(200)

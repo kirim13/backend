@@ -19,12 +19,12 @@ content-type: application/json
     "type": "CAT", 
     "birthday": "02-12-2013", 
     "gotchaDate": "02-12-2013", 
-    "primaryOwnerId": "clrl88tbb00005rq50gih7znl"
+    "primaryOwnerId": "clrldppvd000010fkz94h680o"
 }
 
 ### Description: Update pet via id 
 ## Request 
-PUT http://localhost:3001/pets/clriem4ix0000b5299oqa4ej3
+PUT http://localhost:3001/pets/clrmmvx8l0003e76z671ioo5e
 ## Response
 content-type: application/json
 
@@ -34,10 +34,10 @@ content-type: application/json
     "breed": "Bengal", 
     "type": "CAT", 
     "birthday": "10/10/2000",
-    "gotchaDate": "10/31/2001", 
-    "primaryOwner": "clriggnsy0005y4nfth9471du"
+    "gotchaDate": "10/31/2001",
+    "primaryOwnerId": "clrldpsxi000210fkmg5vvith" 
 }
 
 ### Description: Delete pet via id 
 ## Request
-DELETE http://localhost:3001/pets/clrl8971b00025rq5rioty57l
+DELETE http://localhost:3001/pets/clrmmntrr0008wwynjarh58c2
