@@ -13,7 +13,8 @@ POST http://localhost:3001/medicines
 content-type: application/json
 
 {
-    "name": "Advil", 
+    "name": "Advil",
+    "quantity": 2,
     "unit": "pills" 
 }
 
@@ -25,6 +26,7 @@ content-type: application/json
 
 {
     "name": "Ibuprofen", 
+    "quantity": 2,
     "unit": "tablets" 
 }
 
