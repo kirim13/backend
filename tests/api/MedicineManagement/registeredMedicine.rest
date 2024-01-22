@@ -1,25 +1,27 @@
 ### Definition: List all registeredMedicines
 ## Request 
-GET http:/localhost:3001/registeredMedicines
-
+GET http://localhost:3001/registeredMedicine
 
 ### Definition: List all registeredMedicines via petId
 ## Request 
-GET http://localhost:3001/registeredMedicines/clrml73zj0000gv0c3bzzwj0y
+GET http://localhost:3001/registeredMedicine/clrml73zj0000gv0c3bzzwj0y
 
 ### Definition: List registeredMedicines via id 
 ## Request 
-GET http://localhost:3001/registeredMedicines/clrlb5jen0000t2gx0nmybncc
+GET http://localhost:3001/registeredMedicine/clrlb5jen0000t2gx0nmybncc
 
 ### Definition: List registeredMedicines via Petid
 ## Request 
-GET http://localhost:3001/registeredMedicines/clrlb5jen0000t2gx0nmybncc
+GET http://localhost:3001/registeredMedicine/clrlb5jen0000t2gx0nmybncc
 
+### Definition: Create registeredMedicine via PetId and medicineNotifId
+## Request 
+POST http://localhost:3001/registeredMedicine/clrpdd57n0002h9t23o49y6ns/clro0z26l000510gr0youykfn
 
 ### Definition: Delete registeredMediciness via id  
 ## Request 
-DELETE http://localhost:3001/registeredMedicines/clrmmkwid0002wwyn0vmnopg4
+DELETE http://localhost:3001/registeredMedicine/clrmmkwid0002wwyn0vmnopg4
 
 ### Definition: Delete registeredMediciness via Petid  
-## Request 
-DELETE http://localhost:3001/registeredMedicines/clrmmkwid0002wwyn0vmnopg4
+## Request 555
+lrmmkwid0002wwyn0vmnopg4DELETE http://localhost:3001/registeredMedicine/c

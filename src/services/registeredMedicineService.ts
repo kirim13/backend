@@ -1,34 +1,56 @@
 import db from "../utils/db.server";
 
 const getAllRegisteredMedicines = () => {
-  return db.registeredMedicine.findMany({});
+  return db.registeredMedicine.findMany({
+    include: {
+      pet: {
+        select: {
+          firstName: true,
+          lastName: true,
+        },
+      },
+      medicineNotification: true,
+    },
+  });
 };
 
-const getAllRegisteredMedicinesViaPetId = () => {
-  return db.registeredMedicine.findMany({});
+const getAllRegisteredMedicinesViaPetId = (petId: string) => {
+  return db.registeredMedicine.findMany({ where: { petId } });
 };
 
-const getRegisteredMedicinesViaId = (id: string) => {
+const getRegisteredMedicineViaId = (id: string) => {
   return db.registeredMedicine.findUnique({ where: { id } });
 };
 
-const getRegisteredMedicinesViaPetId = (id: string) => {
+const getRegisteredMedicineViaPetId = (id: string) => {
   return db.registeredMedicine.findUnique({ where: { id } });
 };
 
-const deleteRegisteredMedicinesViaId = (id: string) => {
+//eslint-disable-next-line
+const createRegisteredMedicine = (registeredMedicine: any) => {
+  const { petId, medicinenotifid } = registeredMedicine;
+  return db.registeredMedicine.create({
+    data: {
+      pet: { connect: { id: petId } },
+      medicineNotification: { connect: { id: medicinenotifid } },
+    },
+  });
+};
+
+const deleteRegisteredMedicineViaId = (id: string) => {
   return db.registeredMedicine.delete({ where: { id } });
 };
 
-const deleteRegisteredMedicinesViaPetId = (id: string) => {
+const deleteRegisteredMedicineViaPetId = (id: string) => {
   return db.registeredMedicine.delete({ where: { id } });
 };
 
 export {
   getAllRegisteredMedicines,
   getAllRegisteredMedicinesViaPetId,
-  getRegisteredMedicinesViaId,
-  getRegisteredMedicinesViaPetId,
-  deleteRegisteredMedicinesViaId,
-  deleteRegisteredMedicinesViaPetId,
+  getRegisteredMedicineViaId,
+  getRegisteredMedicineViaPetId,
+  createRegisteredMedicine,
+  deleteRegisteredMedicineViaId,
+  deleteRegisteredMedicineViaPetId,
 };
