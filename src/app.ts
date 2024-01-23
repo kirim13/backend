@@ -6,10 +6,10 @@ import errorHandler from "./middlewares/errorHandler";
 
 import { userRouter } from "./routes/userRoutes";
 import { petRouter } from "./routes/petRoutes";
-import { medicineRouter } from "./routes/medicineRoutes";
-import { medicineDetailRouter } from "./routes/medicineDetailRoutes";
-import { medicineNotificationRouter } from "./routes/medicineNotificationRoutes";
-import { registeredMedicineRouter } from "./routes/registeredMedicineRoutes";
+import { notificationRouter } from "./routes/notificationRoutes";
+import { notificationDetailRouter } from "./routes/notificationDetailRoutes";
+import { notificationScheduleRouter } from "./routes/notificationScheduleRoutes";
+import { registeredNotificationRouter } from "./routes/registeredNotificationRoutes";
 
 const app = express();
 
@@ -19,10 +19,10 @@ app.use(express.json());
 
 app.use("/users", userRouter);
 app.use("/pets", petRouter);
-app.use("/medicines", medicineRouter);
-app.use("/medicineDetails", medicineDetailRouter);
-app.use("/medicineNotifications", medicineNotificationRouter);
-app.use("/registeredMedicine", registeredMedicineRouter);
+app.use("/notifications", notificationRouter);
+app.use("/notificationDetails", notificationDetailRouter);
+app.use("/notificationSchedule", notificationScheduleRouter);
+app.use("/registeredNotifications", registeredNotificationRouter);
 
 app.use(errorHandler);
 

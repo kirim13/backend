@@ -1,43 +1,28 @@
 import db from "../utils/db.server";
-// import type { User } from "./userService";
-import { Type } from "@prisma/client";
+import { PetType } from "@prisma/client";
 
+// Format: MM/DD/YYYY
 const date: Date = new Date();
 const formattedDate: string = date.toLocaleDateString("en-US", {
   year: "numeric",
   month: "2-digit",
   day: "2-digit",
 });
-// Format: MM/DD/YYYY
 
 type ShortPet = {
   id: string;
   firstName: string;
   lastName: string;
   breed: string;
-  type: Type;
+  type: PetType;
 };
-
-/*
-type Pet = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  breed: string;
-  type: Type;
-  birthday: typeof formattedDate;
-  gotchaDate: typeof formattedDate;
-  active: boolean;
-  primaryOwner: User;
-};
-*/
 
 type PetOwner = {
   id: string;
   firstName: string;
   lastName: string;
   breed: string;
-  type: Type;
+  type: PetType;
   birthday: typeof formattedDate;
   gotchaDate: typeof formattedDate;
   active: boolean;
