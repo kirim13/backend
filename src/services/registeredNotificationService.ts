@@ -7,14 +7,38 @@ type RegisteredNotification = {
 
 const getAllRegisteredNotifications = () => {
   return db.registeredNotification.findMany({
-    include: {
+    select: {
+      id: true,
       pet: {
         select: {
           firstName: true,
           lastName: true,
         },
       },
-      notificationSchedules: true,
+      notificationSchedules: {
+        select: {
+          day: true,
+          hour: true,
+          minute: true,
+          timeOfDay: true,
+          endDate: true,
+          repeating: true,
+          notificationDetails: {
+            select: {
+              dosageQuantity: true,
+              dosageUnit: true,
+              frequencyQuantity: true,
+              frequencyUnit: true,
+              notification: {
+                select: {
+                  name: true,
+                  type: true,
+                },
+              },
+            },
+          },
+        },
+      },
     },
   });
 };

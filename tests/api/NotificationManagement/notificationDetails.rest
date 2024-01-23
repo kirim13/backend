@@ -1,0 +1,43 @@
+### Definition: List all notificationDetails
+## Request 
+GET http://localhost:3001/notificationDetails
+
+### Definition: List all notificationDetails via notificationId
+## Request 
+GET http://localhost:3001/notificationDetails/clrml73zj0000gv0c3bzzwj0y
+
+### Definition: List notificationDetails via id 
+## Request 
+GET http://localhost:3001/notificationDetails/clrlb5jen0000t2gx0nmybncc
+
+### Definition: Create notificationDetails  
+## Request 
+POST http://localhost:3001/notificationDetails 
+## Response 
+content-type: application/json
+
+{
+    "dosageQuantity": 1,
+    "dosageUnit": "mg",
+    "frequencyQuantity": 2,
+    "frequencyUnit": "WEEK",
+    "notificationId": "clrqx13nd0000125frsaxecr9"
+}
+
+### Definition: Update notificationDetails via id
+## Request 
+PUT http://localhost:3001/notificationDetails/clrmodkgb000168ojmllgmham
+## Response 
+content-type: application/json
+
+{
+    "dosageQuantity": 1,
+    "dosageUnit": "mg",
+    "frequencyQuantity": 2,
+    "frequencyUnit": "WEEK",
+    "notificationId": "clrmoepka0000921njwk0fep0"
+}
+
+### Definition: Delete notificationDetails via id  
+## Request 
+DELETE http://localhost:3001/notificationDetails/clrmmkwid0002wwyn0vmnopg4

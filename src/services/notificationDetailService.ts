@@ -6,7 +6,7 @@ const getAllNotificationDetails = async () => {
       notification: {
         select: {
           name: true,
-          unit: true,
+          type: true,
         },
       },
     },

@@ -1,0 +1,37 @@
+### Definition: List all notifications 
+## Request 
+GET http://localhost:3001/notifications
+
+### Definition: List notification via id 
+## Request 
+GET http://localhost:3001/notifications/clrml73zj0000gv0c3bzzwj0y
+
+### Definition: Create notification  
+## Request 
+POST http://localhost:3001/notifications 
+## Response 
+content-type: application/json
+
+{
+    "name": "Advil",
+    "type": "MEDICINE",
+    "quantity": 2,
+    "unit": "pills" 
+}
+
+### Definition: Update notification via id
+## Request 
+PUT http://localhost:3001/notifications/clrlb5jen0000t2gx0nmybncc
+## Response 
+content-type: application/json
+
+{
+    "name": "Ibuprofen", 
+    "type": "MEDICINE",
+    "quantity": 2,
+    "unit": "tablets" 
+}
+
+### Definition: Delete notification via id  
+## Request 
+DELETE http://localhost:3001/notifications/clrlxjcm70000k59g43phb4oo

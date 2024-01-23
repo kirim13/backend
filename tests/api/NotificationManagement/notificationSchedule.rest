@@ -1,0 +1,45 @@
+### Definition: List all notificationSchedules
+## Request 
+GET http://localhost:3001/notificationSchedule
+
+### Definition: List all notificationSchedules via medicineId
+## Request 
+GET http://localhost:3001/notificationSchedule/clrml73zj0000gv0c3bzzwj0y
+
+### Definition: List notificationSchedules via id 
+## Request 
+GET http://localhost:3001/notificationSchedule/clrlb5jen0000t2gx0nmybncc
+
+### Definition: Create notificationSchedule 
+## Request 
+POST http://localhost:3001/notificationSchedule
+## Response 
+content-type: application/json
+
+{
+    "day": "Monday",
+    "hour": 2,
+    "minute": 45,
+    "timeOfDay": "PM",
+    "endDate": "1/23/2024", 
+    "notificationDetailId": "clrqx1mvb0001125fwpei4em8"
+}
+
+### Definition: Update notificationSchedule via id
+## Request 
+PUT http://localhost:3001/notificationSchedule/clrqx3nly0002kr8t6ashs8f6
+## Response 
+content-type: application/json
+
+{
+    "day": "Monday",
+    "hour": 2,
+    "minute": 45,
+    "timeOfDay": "AM",
+    "endDate": "1/23/2024", 
+    "notificationDetailId": "clrqx1mvb0001125fwpei4em8"
+}
+
+### Definition: Delete notificationSchedule via id  
+## Request 
+DELETE http://localhost:3001/notificationSchedule/clrmmkwid0002wwyn0vmnopg4

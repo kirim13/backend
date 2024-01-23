@@ -31,8 +31,7 @@ const getAllNotificationSchedules = async () => {
           notification: {
             select: {
               name: true,
-              quantity: true,
-              unit: true,
+              type: true,
             },
           },
         },

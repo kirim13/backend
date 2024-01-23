@@ -1,0 +1,27 @@
+### Definition: List all registeredNotifications
+## Request 
+GET http://localhost:3001/registeredNotifications
+
+### Definition: List all registeredNotifications via petId
+## Request 
+GET http://localhost:3001/registeredNotifications/clrml73zj0000gv0c3bzzwj0y
+
+### Definition: List registeredNotifications via id 
+## Request 
+GET http://localhost:3001/registeredNotifications/clrlb5jen0000t2gx0nmybncc
+
+### Definition: List registeredNotifications via Petid
+## Request 
+GET http://localhost:3001/registeredNotifications/clrlb5jen0000t2gx0nmybncc
+
+### Definition: Create registeredNotification via PetId and notificationScheduleId
+## Request 
+POST http://localhost:3001/registeredNotifications/clrqxhexm0002zcdx35bduwd3/clrqx3nly0002kr8t6ashs8f6
+
+### Definition: Delete registeredNotificationss via id  
+## Request 
+DELETE http://localhost:3001/registeredNotifications/clrmmkwid0002wwyn0vmnopg4
+
+### Definition: Delete registeredNotificationss via Petid  
+## Request
+DELETE http://localhost:3001/registeredNotifications/clrmmkwid0002wwyn0vmnopg4
