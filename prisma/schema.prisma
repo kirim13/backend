@@ -17,6 +17,10 @@ model User {
   createdAt      DateTime       @default(now())
   appearanceMode AppearanceMode @default(LIGHT)
   pets           Pet[]
+  records Record[]
+  notifications Notification[] 
+  inventory Inventory[]
+  finance Finance[]
 }
 
 model Pet {
@@ -24,38 +28,44 @@ model Pet {
   firstName      String
   lastName       String
   breed          String
-  type           Type
+  type           PetType
   birthday       String
   gotchaDate     String
   active         Boolean  @default(true)
   primaryOwnerId String?
   primaryOwner   User?     @relation(fields: [primaryOwnerId], references: [id], onDelete: Cascade)
-  registeredMedicine RegisteredMedicine[]
+  registeredNotifications RegisteredNotification[] 
+  registeredRecords RegisteredRecord[]
+  registeredInventory RegisteredInventory[] 
+  registeredFinance RegisteredFinance[]
 }
 
-model Medicine { 
+model Notification { 
   id String @id @default(cuid())
+  type NotificationType
   name String 
   quantity Int 
   unit String 
   notes Boolean @default(false)
   photos Boolean @default(false)
   createdAt DateTime @default(now())
-  medicineDetail MedicineDetail[]
+  userId String? 
+  user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  notificationDetails NotificationDetail[]
 }
 
-model MedicineDetail { 
+model NotificationDetail { 
   id String @id @default(cuid())
   dosageQuantity Int?
   dosageUnit String? 
   frequencyQuantity Int
   frequencyUnit FrequencyUnit 
-  medicineId String? 
-  medicine Medicine? @relation(fields: [medicineId], references: [id], onDelete: Cascade)
-  medicineNotification MedicineNotification[]
+  notificationId String? 
+  notification Notification? @relation(fields: [notificationId], references: [id], onDelete: Cascade)
+  notificationSchedules NotificationSchedule[]
 }
 
-model MedicineNotification {
+model NotificationSchedule {
   id String @id @default(cuid())
   day String? 
   hour Int
@@ -64,17 +74,81 @@ model MedicineNotification {
   endDate String? 
   repeating Repeating? 
   createdAt DateTime @default(now())
-  medicineDetailId String? 
-  medicineDetail MedicineDetail? @relation(fields: [medicineDetailId], references: [id], onDelete: Cascade)
-  registeredMedicine RegisteredMedicine[]
+  notificationDetailId String? 
+  notificationDetails NotificationDetail? @relation(fields: [notificationDetailId], references: [id], onDelete: Cascade)
+  registeredNotifications RegisteredNotification[] 
+} 
+
+model RegisteredNotification {
+  id String @id @default(cuid())
+  petId String 
+  pet Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+  notificationScheduleId String 
+  notificationSchedules NotificationSchedule @relation(fields: [notificationScheduleId], references: [id], onDelete: Cascade)
 }
 
-model RegisteredMedicine {
+model Record {
   id String @id @default(cuid())
-  petId String?
-  pet Pet? @relation(fields: [petId], references: [id], onDelete: Cascade)
-  medicineNotificationId String? 
-  medicineNotification MedicineNotification? @relation(fields: [medicineNotificationId], references: [id], onDelete: Cascade)
+  type RecordType? 
+  notes String? 
+  photos Boolean @default(false)
+  createdAt DateTime @default(now())
+  userId String? 
+  users User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  registeredRecords RegisteredRecord[] 
+}
+
+model RegisteredRecord {
+  id String @id @default(cuid())
+  petId String 
+  pets Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+  recordId String 
+  record Record @relation(fields: [recordId], references: [id], onDelete: Cascade)
+}
+
+model Item {
+  id String @id @default(cuid())
+  type InventoryType
+  inventory Inventory[]
+}
+
+model Inventory {
+  id String @id @default(cuid())
+  quantity Int 
+  itemId String 
+  items Item @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  userId String 
+  users User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  registeredInventory RegisteredInventory[]
+}
+
+model RegisteredInventory {
+  id String @id @default(cuid())
+  type InventoryType 
+  inventoryId String 
+  inventory Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade) 
+  petId String 
+  pets Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+}
+
+model Finance {
+  id String @id @default(cuid())
+  type FinanceType 
+  amount Int 
+  notes String 
+  repeating Repeating?
+  createdAt DateTime @default(now())
+  userId String 
+  users User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  registeredFinance RegisteredFinance[]
+}
+
+model RegisteredFinance {
+  id String @id @default(cuid())
+  financeId String 
+  finance Finance @relation(fields: [financeId], references: [id], onDelete: Cascade) 
+  petId String 
+  pets Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
 }
 
 enum AppearanceMode {
@@ -82,7 +156,7 @@ enum AppearanceMode {
   DARK
 }
 
-enum Type {
+enum PetType {
   CAT
   DOG
 }
@@ -90,6 +164,12 @@ enum Type {
 enum TimeOfDay {
   AM 
   PM
+}
+
+enum NotificationType {
+  MEDICINE
+  FOOD
+  WATER
 }
 
 enum FrequencyUnit {
@@ -108,4 +188,31 @@ enum Repeating {
   MONTHLY 
   BIMONTHLY
   QUARTERLY
+}
+
+enum RecordType {
+  VACCINATION
+  VET_VISIT
+  CERTIFICATION
+}
+
+enum InventoryType { 
+  HEADWEAR 
+  ACCESSORY
+  OUTERWEAR 
+}
+
+enum FinanceType {
+  FOOD_AND_TREATS
+  TOYS_AND_CLOTHING 
+  SUPPLIES
+  GROOMING
+  SITTER
+  VET
+  DENTAL
+  SHORT_TERM_MEDICATION
+  LONG_TERM_MEDICATION
+  EMERGENCY
+  INSURANCE
+  MISC
 }
