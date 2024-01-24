@@ -1,0 +1,50 @@
+### Create new finance with userId
+# Request
+POST http://localhost:3001/finances
+content-type: application/json
+
+# Response
+{
+    "type": "SHORT_TERM_MEDICATION",
+    "name": "Advil", 
+    "amount": 100,
+    "notes": "Daily medicine for Toast", 
+    "userId": "clrr3iw3t0002xxdxabu5kl39"
+}
+### Get all finances 
+# Request
+GET http://localhost:3001/finances
+
+### Get all finances via id
+# Request 
+GET http://localhost:3001/finances/clrr3j3hj0003xxdxq8tqynvl
+
+### Get all finances via userId
+# Request  
+GET http://localhost:3001/finances/users/clrr3iw3t0002xxdxabu5kl39
+
+### Get all finances via type 
+# Request 
+GET http://localhost:3001/finances/types/SHORT_TERM_MEDICATION
+
+### Get all finances via type (INCORRECT TEST) 
+# Request 
+GET http://localhost:3001/finances/types/MEDIUM_TERM_MEDICATION
+
+### Update finance via id
+# Request 
+PUT http://localhost:3001/finances/clrr6xd1100005l9z7rrtl4di
+content-type: application/json
+# Response
+
+{
+    "type": "SHORT_TERM_MEDICATION",
+    "name": "Advil", 
+    "amount": 150,
+    "notes": "Daily medicine for Toast", 
+    "userId": "clrr3iw3t0002xxdxabu5kl39"
+}
+
+### Delete finance via id
+# Request 
+DELETE http://localhost:3001/finances/clrr3j3hj0003xxdxq8tqynvl

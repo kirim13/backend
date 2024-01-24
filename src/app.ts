@@ -10,6 +10,7 @@ import { notificationRouter } from "./routes/notificationRoutes";
 import { notificationDetailRouter } from "./routes/notificationDetailRoutes";
 import { notificationScheduleRouter } from "./routes/notificationScheduleRoutes";
 import { registeredNotificationRouter } from "./routes/registeredNotificationRoutes";
+import { financeRouter } from "./routes/financeRoutes";
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use("/notifications", notificationRouter);
 app.use("/notificationDetails", notificationDetailRouter);
 app.use("/notificationSchedule", notificationScheduleRouter);
 app.use("/registeredNotifications", registeredNotificationRouter);
+app.use("/finances", financeRouter);
 
 app.use(errorHandler);
 

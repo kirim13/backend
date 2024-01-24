@@ -21,7 +21,7 @@ CREATE TYPE "RecordType" AS ENUM ('VACCINATION', 'VET_VISIT', 'CERTIFICATION');
 CREATE TYPE "InventoryType" AS ENUM ('HEADWEAR', 'ACCESSORY', 'OUTERWEAR');
 
 -- CreateEnum
-CREATE TYPE "FinanceType" AS ENUM ('FOOD_AND_TREATS', 'TOYS_AND_CLOTHING', 'SUPPLIES', 'GROOMING', 'PET_SITTER', 'VET', 'DENTAL', 'SHORT_TERM_MEDICATION', 'LONG_TERM_MEDICATION', 'EMERGENCY', 'INSURANCE', 'MISC');
+CREATE TYPE "FinanceType" AS ENUM ('FOOD_AND_TREATS', 'TOYS_AND_CLOTHING', 'SUPPLIES', 'GROOMING', 'SITTER', 'VET', 'DENTAL', 'SHORT_TERM_MEDICATION', 'LONG_TERM_MEDICATION', 'EMERGENCY', 'INSURANCE', 'MISC');
 
 -- DropForeignKey
 ALTER TABLE "MedicineDetail" DROP CONSTRAINT "MedicineDetail_medicineId_fkey";
@@ -109,8 +109,9 @@ CREATE TABLE "RegisteredNotification" (
 CREATE TABLE "Record" (
     "id" TEXT NOT NULL,
     "type" "RecordType",
+    "name" TEXT NOT NULL,
     "notes" TEXT,
-    "photos" BOOLEAN NOT NULL DEFAULT false,
+    "photos" BOOLEAN DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT,
 
@@ -130,6 +131,7 @@ CREATE TABLE "RegisteredRecord" (
 CREATE TABLE "Item" (
     "id" TEXT NOT NULL,
     "type" "InventoryType" NOT NULL,
+    "name" TEXT NOT NULL,
 
     CONSTRAINT "Item_pkey" PRIMARY KEY ("id")
 );
@@ -147,7 +149,6 @@ CREATE TABLE "Inventory" (
 -- CreateTable
 CREATE TABLE "RegisteredInventory" (
     "id" TEXT NOT NULL,
-    "type" "InventoryType" NOT NULL,
     "inventoryId" TEXT NOT NULL,
     "petId" TEXT NOT NULL,
 
@@ -158,8 +159,10 @@ CREATE TABLE "RegisteredInventory" (
 CREATE TABLE "Finance" (
     "id" TEXT NOT NULL,
     "type" "FinanceType" NOT NULL,
+    "name" TEXT NOT NULL,
     "amount" INTEGER NOT NULL,
-    "notes" TEXT NOT NULL,
+    "notes" TEXT,
+    "repeating" "Repeating",
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "userId" TEXT NOT NULL,
 

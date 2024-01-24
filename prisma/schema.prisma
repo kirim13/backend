@@ -90,8 +90,9 @@ model RegisteredNotification {
 model Record {
   id String @id @default(cuid())
   type RecordType? 
+  name String
   notes String? 
-  photos Boolean @default(false)
+  photos Boolean? @default(false)
   createdAt DateTime @default(now())
   userId String? 
   users User? @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -109,6 +110,7 @@ model RegisteredRecord {
 model Item {
   id String @id @default(cuid())
   type InventoryType
+  name String 
   inventory Inventory[]
 }
 
@@ -124,7 +126,6 @@ model Inventory {
 
 model RegisteredInventory {
   id String @id @default(cuid())
-  type InventoryType 
   inventoryId String 
   inventory Inventory @relation(fields: [inventoryId], references: [id], onDelete: Cascade) 
   petId String 
@@ -134,8 +135,9 @@ model RegisteredInventory {
 model Finance {
   id String @id @default(cuid())
   type FinanceType 
+  name String 
   amount Int 
-  notes String 
+  notes String? 
   repeating Repeating?
   createdAt DateTime @default(now())
   userId String 
