@@ -119,29 +119,3 @@ registeredNotificationRouter.delete(
     }
   }
 );
-
-registeredNotificationRouter.delete(
-  "/:petid",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { petId } = req.params;
-    try {
-      const registeredNotification =
-        await registeredNotificationServices.deleteRegisteredNotificationViaPetId(
-          petId
-        );
-      if (!registeredNotification) {
-        return res
-          .status(200)
-          .json({ message: `No registered notification with pet id:${petId}` });
-      } else if (registeredNotification) {
-        return res.status(200).json(registeredNotification);
-      } else
-        throw new Error(
-          `Delete registered notification with pet id:${petId} failed`
-        );
-      //eslint-disable-next-line
-    } catch (err: any) {
-      next(err);
-    }
-  }
-);

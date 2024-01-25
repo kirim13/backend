@@ -67,15 +67,10 @@ const deleteRegisteredNotificationViaId = (id: string) => {
   return db.registeredNotification.delete({ where: { id } });
 };
 
-const deleteRegisteredNotificationViaPetId = (id: string) => {
-  return db.registeredNotification.delete({ where: { id } });
-};
-
 export {
   getAllRegisteredNotifications,
   getAllRegisteredNotificationsViaPetId,
   getRegisteredNotificationViaId,
   createRegisteredNotification,
   deleteRegisteredNotificationViaId,
-  deleteRegisteredNotificationViaPetId,
 };
