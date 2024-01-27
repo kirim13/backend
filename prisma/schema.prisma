@@ -47,7 +47,7 @@ model Notification {
   quantity Int 
   unit String 
   notes Boolean @default(false)
-  photos Boolean @default(false)
+  photos String?
   createdAt DateTime @default(now())
   userId String? 
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -92,7 +92,7 @@ model Record {
   type RecordType? 
   name String
   notes String? 
-  photos Boolean? @default(false)
+  photos String? 
   createdAt DateTime @default(now())
   userId String? 
   users User? @relation(fields: [userId], references: [id], onDelete: Cascade)

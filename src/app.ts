@@ -12,6 +12,7 @@ import { notificationScheduleRouter } from "./routes/notificationScheduleRoutes"
 import { registeredNotificationRouter } from "./routes/registeredNotificationRoutes";
 import { financeRouter } from "./routes/financeRoutes";
 import { registeredFinanceRouter } from "./routes/registeredFinanceRoutes";
+import { recordRouter } from "./routes/recordRoutes";
 
 const app = express();
 
@@ -27,6 +28,7 @@ app.use("/notificationSchedule", notificationScheduleRouter);
 app.use("/registeredNotifications", registeredNotificationRouter);
 app.use("/finances", financeRouter);
 app.use("/registeredFinances", registeredFinanceRouter);
+app.use("/records", recordRouter);
 
 app.use(errorHandler);
 
