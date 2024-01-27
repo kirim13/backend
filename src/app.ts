@@ -13,6 +13,8 @@ import { registeredNotificationRouter } from "./routes/registeredNotificationRou
 import { financeRouter } from "./routes/financeRoutes";
 import { registeredFinanceRouter } from "./routes/registeredFinanceRoutes";
 import { recordRouter } from "./routes/recordRoutes";
+import { weightRouter } from "./routes/weightRoutes";
+import { registeredWeightRouter } from "./routes/registeredWeightRoutes";
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.use("/registeredNotifications", registeredNotificationRouter);
 app.use("/finances", financeRouter);
 app.use("/registeredFinances", registeredFinanceRouter);
 app.use("/records", recordRouter);
+app.use("/weights", weightRouter);
+app.use("/registeredWeights", registeredWeightRouter);
 
 app.use(errorHandler);
 

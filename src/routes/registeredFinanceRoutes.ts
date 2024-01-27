@@ -56,11 +56,10 @@ registeredFinanceRouter.get(
       if (!registeredFinance) {
         return res
           .status(200)
-          .json({ message: `No registered finances with id:${id}` });
+          .json({ message: `No registered finance with id:${id}` });
       } else if (registeredFinance) {
         return res.status(200).json(registeredFinance);
-      } else
-        throw new Error(`Get registered notification with id:${id} failed`);
+      } else throw new Error(`Get registered finance with id:${id} failed`);
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);
@@ -81,12 +80,12 @@ registeredFinanceRouter.post(
           registeredFinanceData
         );
       if (!registeredFinance) {
-        return res.status(200).json({ message: `No registered notification` });
+        return res.status(200).json({ message: `No registered finance` });
       } else if (registeredFinance) {
         return res
           .status(200)
-          .json({ message: `Registered notification successfully` });
-      } else throw new Error(`Create registered notification failed`);
+          .json({ message: `Registered finance successfully` });
+      } else throw new Error(`Create registered finance failed`);
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);
@@ -107,8 +106,7 @@ registeredFinanceRouter.delete(
           .json({ message: `No registered finances with id:${id}` });
       } else if (registeredFinance) {
         return res.status(200).json(registeredFinance);
-      } else
-        throw new Error(`Delete registered notification with id:${id} failed`);
+      } else throw new Error(`Delete registered finance with id:${id} failed`);
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);

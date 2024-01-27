@@ -21,6 +21,7 @@ model User {
   notifications Notification[] 
   inventory Inventory[]
   finance Finance[]
+  weight Weight[]
 }
 
 model Pet {
@@ -38,6 +39,7 @@ model Pet {
   registeredRecords RegisteredRecord[]
   registeredInventory RegisteredInventory[] 
   registeredFinance RegisteredFinance[]
+  registeredWeight RegisteredWeight[]
 }
 
 model Notification { 
@@ -149,6 +151,26 @@ model RegisteredFinance {
   id String @id @default(cuid())
   financeId String 
   finance Finance @relation(fields: [financeId], references: [id], onDelete: Cascade) 
+  petId String 
+  pets Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
+}
+
+model Weight {
+  id String @id @default(cuid())
+  weight Int
+  targetWeight Int? 
+  unit String
+  notes String?
+  createdAt DateTime @default(now())
+  userId String 
+  users User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  registeredWeight RegisteredWeight[]
+}
+
+model RegisteredWeight {
+  id String @id @default(cuid())
+  weightId String 
+  weight Weight @relation(fields: [weightId], references: [id], onDelete: Cascade) 
   petId String 
   pets Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
 }
