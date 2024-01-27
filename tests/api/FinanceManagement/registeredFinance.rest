@@ -1,0 +1,19 @@
+### Definition: List all registeredFinances
+## Request 
+GET http://localhost:3001/registeredFinances
+
+### Definition: List all registeredFinances via petId
+## Request 
+GET http://localhost:3001/registeredFinances/petid/clrtr6d510004lbvvzutqodr6
+
+### Definition: List registeredFinances via id 
+## Request 
+GET http://localhost:3001/registeredFinances/clrtr7e4x0006lbvvr3688ncg
+
+### Definition: Create registeredFinance via PetId and financeId
+## Request 
+POST http://localhost:3001/registeredFinances/clrtr6d510004lbvvzutqodr6/clrtr54eh0002lbvv0vpq34t1
+
+### Definition: Delete registeredFinances via id  
+## Request 
+DELETE http://localhost:3001/registeredFinances/clrmmkwid0002wwyn0vmnopg4

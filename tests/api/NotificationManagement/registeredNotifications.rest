@@ -21,7 +21,3 @@ POST http://localhost:3001/registeredNotifications/clrqxhexm0002zcdx35bduwd3/clr
 ### Definition: Delete registeredNotificationss via id  
 ## Request 
 DELETE http://localhost:3001/registeredNotifications/clrmmkwid0002wwyn0vmnopg4
-
-### Definition: Delete registeredNotificationss via Petid  
-## Request
-DELETE http://localhost:3001/registeredNotifications/clrmmkwid0002wwyn0vmnopg4

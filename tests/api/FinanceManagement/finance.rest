@@ -9,7 +9,7 @@ content-type: application/json
     "name": "Advil", 
     "amount": 100,
     "notes": "Daily medicine for Toast", 
-    "userId": "clrr3iw3t0002xxdxabu5kl39"
+    "userId": "clrtr4raq0000lbvvqyvbstfk"
 }
 ### Get all finances 
 # Request
