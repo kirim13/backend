@@ -20,6 +20,7 @@ const getAllRegisteredFinances = () => {
           type: true,
           name: true,
           amount: true,
+          createdAt: true,
         },
       },
     },
@@ -27,7 +28,19 @@ const getAllRegisteredFinances = () => {
 };
 
 const getAllRegisteredFinancesViaPetId = (petId: string) => {
-  return db.registeredFinance.findMany({ where: { petId } });
+  return db.registeredFinance.findMany({
+    where: { petId },
+    select: {
+      finance: {
+        select: {
+          type: true,
+          name: true,
+          amount: true,
+          createdAt: true,
+        },
+      },
+    },
+  });
 };
 
 const getRegisteredFinanceViaId = (id: string) => {

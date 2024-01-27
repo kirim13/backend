@@ -23,7 +23,7 @@ registeredFinanceRouter.get(
 );
 
 registeredFinanceRouter.get(
-  "/:petid",
+  "/petid/:petid",
   async (req: Request, res: Response, next: NextFunction) => {
     const { petId } = req.params;
     try {
@@ -33,7 +33,7 @@ registeredFinanceRouter.get(
         return res.status(200).json({
           message: `No registered finances with pet id:${petId}`,
         });
-      } else if (registeredFinances.length > 1) {
+      } else if (registeredFinances.length >= 1) {
         return res.status(200).json(registeredFinances);
       } else
         throw new Error(
