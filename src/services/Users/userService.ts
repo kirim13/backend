@@ -27,12 +27,9 @@ const listUsers = async (): Promise<User[]> => {
 const getUser = async (id: string): Promise<object | null> => {
   return db.user.findUnique({
     where: { id },
-    select: {
-      id: true,
-      firstName: true,
-      lastName: true,
-      email: true,
-      pets: true,
+    include: {
+      fromUserRelationships: true,
+      toUserRelationships: true,
     },
   });
 };

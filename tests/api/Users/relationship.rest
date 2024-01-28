@@ -1,0 +1,18 @@
+### Description: Send relationship request 
+## Request 
+POST http://localhost:3001/relationships 
+## Response 
+content-type: application/json
+
+{
+    "fromUserId": "clrwovsej0000dfv7t13tqj4l",
+    "toUserId": "clrxbk1730000ay6fxtsooys4"
+}
+
+### Description: Get all relationships 
+## Request 
+GET http://localhost:3001/relationships 
+
+### Description: Get relationship via id 
+## Request 
+GET http://localhost:3001/relationships/clrxbkho40002ay6fuuunnd62

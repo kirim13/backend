@@ -4,7 +4,12 @@ GET http://localhost:3001/users
 
 ### Description: Retrieve user via id 
 ## Request 
-GET http://localhost:3001/users/clriem4ix0000b5299oqa4ej3
+GET http://localhost:3001/users/clrxbk1730000ay6fxtsooys4
+
+### Description: Retrieve user via id 
+## Request 
+GET http://localhost:3001/users/clrwovsej0000dfv7t13tqj4l
+
 
 ### Description: Create user 
 ## Request 
@@ -13,9 +18,9 @@ POST http://localhost:3001/users
 content-type: application/json
 
 {
-    "firstName": "John1",
-    "lastName": "Smithy2",
-    "email": "johnsmith1@example.com",
+    "firstName": "Mary",
+    "lastName": "Smith",
+    "email": "johnsmith2@example.com",
     "password": "password"
 }
 

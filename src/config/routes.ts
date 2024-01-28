@@ -13,6 +13,7 @@ import { registeredWeightRouter } from "../routes/Weight/registeredWeightRoutes"
 import { itemRouter } from "../routes/Inventory/itemRoutes";
 import { inventoryRouter } from "../routes/Inventory/inventoryRoutes";
 import { registeredInventoryRouter } from "../routes/Inventory/registeredInventoryRoutes";
+import { relationshipRouter } from "../routes/Users/relationshipRoutes";
 
 export default (app: Express): void => {
   app.use("/users", userRouter);
@@ -29,4 +30,5 @@ export default (app: Express): void => {
   app.use("/items", itemRouter);
   app.use("/inventory", inventoryRouter);
   app.use("/registeredInventory", registeredInventoryRouter);
+  app.use("/relationships", relationshipRouter);
 };
