@@ -1,0 +1,32 @@
+### Create new item
+# Request
+POST http://localhost:3001/items
+content-type: application/json
+
+# Response
+{
+    "type": "OUTERWEAR",
+    "name": "Christmas Sweater" 
+}
+### Get all items
+# Request
+GET http://localhost:3001/items
+
+### Get item via id
+# Request
+GET http://localhost:3001/items/clrx78uxu0000rlixex1m5dg2
+
+### Update item via id
+# Request 
+PUT http://localhost:3001/items/clrx78uxu0000rlixex1m5dg2
+content-type: application/json
+# Response
+
+{
+    "type": "ACCESSORY",
+    "name": "Cat Ears" 
+}
+
+### Delete item via id 
+# Request 
+DELETE http://localhost:3001/items/clrx75pib0000l3j9hiwrt60y

@@ -1,15 +1,16 @@
 import { type Express } from "express";
-import { userRouter } from "../routes/userRoutes";
-import { petRouter } from "../routes/petRoutes";
-import { notificationRouter } from "../routes/notificationRoutes";
-import { notificationDetailRouter } from "../routes/notificationDetailRoutes";
-import { notificationScheduleRouter } from "../routes/notificationScheduleRoutes";
-import { registeredNotificationRouter } from "../routes/registeredNotificationRoutes";
-import { financeRouter } from "../routes/financeRoutes";
-import { registeredFinanceRouter } from "../routes/registeredFinanceRoutes";
-import { recordRouter } from "../routes/recordRoutes";
-import { weightRouter } from "../routes/weightRoutes";
-import { registeredWeightRouter } from "../routes/registeredWeightRoutes";
+import { userRouter } from "../routes/Users/userRoutes";
+import { petRouter } from "../routes/Pets/petRoutes";
+import { notificationRouter } from "../routes/Notifications/notificationRoutes";
+import { notificationDetailRouter } from "../routes/Notifications/notificationDetailRoutes";
+import { notificationScheduleRouter } from "../routes/Notifications/notificationScheduleRoutes";
+import { registeredNotificationRouter } from "../routes/Notifications/registeredNotificationRoutes";
+import { financeRouter } from "../routes/Finances/financeRoutes";
+import { registeredFinanceRouter } from "../routes/Finances/registeredFinanceRoutes";
+import { recordRouter } from "../routes/Records/recordRoutes";
+import { weightRouter } from "../routes/Weight/weightRoutes";
+import { registeredWeightRouter } from "../routes/Weight/registeredWeightRoutes";
+import { itemRouter } from "../routes/Inventory/itemRoutes";
 
 export default (app: Express): void => {
   app.use("/users", userRouter);
@@ -23,4 +24,5 @@ export default (app: Express): void => {
   app.use("/records", recordRouter);
   app.use("/weights", weightRouter);
   app.use("/registeredWeights", registeredWeightRouter);
+  app.use("/items", itemRouter);
 };
