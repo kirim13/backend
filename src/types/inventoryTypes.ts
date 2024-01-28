@@ -11,4 +11,9 @@ type Inventory = {
   userId: string;
 };
 
-export { Item, Inventory };
+type RegisteredInventory = {
+  inventoryId: string;
+  petId: string;
+};
+
+export { Item, Inventory, RegisteredInventory };

@@ -31,6 +31,26 @@ const getAllInventory = async () => {
   });
 };
 
+const getAllInventoryViaItemId = async (itemId: string) => {
+  return db.inventory.findMany({
+    where: { itemId },
+    include: {
+      users: {
+        select: {
+          firstName: true,
+          lastName: true,
+        },
+      },
+      items: {
+        select: {
+          name: true,
+          type: true,
+        },
+      },
+    },
+  });
+};
+
 const getInventory = async (id: string) => {
   return db.inventory.findUnique({
     where: { id },
@@ -58,6 +78,7 @@ const deleteInventory = async (id: string) => {
 export {
   createInventory,
   getAllInventory,
+  getAllInventoryViaItemId,
   getInventory,
   updateInventory,
   deleteInventory,

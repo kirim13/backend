@@ -1,0 +1,19 @@
+### Definition: List all registeredInventory
+## Request 
+GET http://localhost:3001/registeredInventory
+
+### Definition: List all registeredInventory via petId
+## Request 
+GET http://localhost:3001/registeredInventory/petid/clrtr6d510004lbvvzutqodr6
+
+### Definition: List registeredInventory via id 
+## Request 
+GET http://localhost:3001/registeredInventory/clrtr7e4x0006lbvvr3688ncg
+
+### Definition: Create registeredInventory via PetId and inventoryId
+## Request 
+POST http://localhost:3001/registeredInventory/clrx9804400012ei4hwu5vwu6/clrx87eey00002gtc6vkvr2o7
+
+### Definition: Delete registeredInventory via id  
+## Request 
+DELETE http://localhost:3001/registeredInventory/clrmmkwid0002wwyn0vmnopg4

@@ -1,24 +1,29 @@
-### Create new item
+### Create new inventory
 # Request
-POST http://localhost:3001/items
+POST http://localhost:3001/inventory
 content-type: application/json
 
 # Response
 {
-    "type": "OUTERWEAR",
-    "name": "Christmas Sweater" 
+    "quantity": 3,
+    "itemId": "clrx78uxu0000rlixex1m5dg2",
+    "userId": "clrwovsej0000dfv7t13tqj4l"
 }
-### Get all items
+### Get all inventory
 # Request
-GET http://localhost:3001/items
+GET http://localhost:3001/inventory
 
-### Get item via id
+### Get all inventory via item id 
 # Request
-GET http://localhost:3001/items/clrx78uxu0000rlixex1m5dg2
+GET http://localhost:3001/inventory/item/clrx78uxu0000rlixex1m5dg2
 
-### Update item via id
+### Get inventory via id
+# Request
+GET http://localhost:3001/inventory/clrx87eey00002gtc6vkvr2o7
+
+### Update inventory via id
 # Request 
-PUT http://localhost:3001/items/clrx78uxu0000rlixex1m5dg2
+PUT http://localhost:3001/inventory/clrx87eey00002gtc6vkvr2o7
 content-type: application/json
 # Response
 
@@ -27,6 +32,6 @@ content-type: application/json
     "name": "Cat Ears" 
 }
 
-### Delete item via id 
+### Delete inventory via id 
 # Request 
-DELETE http://localhost:3001/items/clrx75pib0000l3j9hiwrt60y
+DELETE http://localhost:3001/inventory/clrx75pib0000l3j9hiwrt60y
