@@ -16,3 +16,7 @@ GET http://localhost:3001/relationships
 ### Description: Get relationship via id 
 ## Request 
 GET http://localhost:3001/relationships/clrxbkho40002ay6fuuunnd62
+
+### Description: Update relationship request 
+## Request 
+PUT http://localhost:3001/relationships/accept/clrxbkho40002ay6fuuunnd62 

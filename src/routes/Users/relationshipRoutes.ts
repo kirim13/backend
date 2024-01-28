@@ -8,6 +8,7 @@ relationshipRouter.post(
   async (req: Request, res: Response, next: NextFunction) => {
     const relationshipData = req.body;
     relationshipData.status = "PENDING";
+    if (!relationshipData) throw new Error("Relationship data is required");
     try {
       const relationshipRequest =
         await relationshipServices.sendRelationshipRequest(relationshipData);
@@ -58,25 +59,58 @@ relationshipRouter.get(
   }
 );
 
-relationshipRouter.get(
+relationshipRouter.put(
   "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
+    const relationshipData = req.body;
     if (!id) throw new Error("Id is required");
+    if (!relationshipData) throw new Error("Relationship data is required");
     try {
-      const relationship = await relationshipServices.getRelationship(id);
+      const relationship = await relationshipServices.updateRelationship(
+        id,
+        relationshipData
+      );
       if (!relationship) {
-        res.status(200).json(`Get relationship with id${id} failed`);
+        res.status(200).json(`Update relationship with id${id} failed`);
       } else if (relationship) {
-        res.status(200).json(relationship);
-      } else throw new Error(`Get relationship with id${id} failed`);
+        res
+          .status(200)
+          .json(
+            `Updated relationship request to ${relationshipData.status} successfully`
+          );
+      } else throw new Error(`Update relationship with id${id} failed`);
     } catch (err) {
       next(err);
     }
   }
 );
 
-relationshipRouter.get(
+relationshipRouter.put(
+  "/accept/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const relationshipData = req.body;
+    relationshipData.status = "CONFIRMED";
+    if (!id) throw new Error("Id is required");
+    if (!relationshipData) throw new Error("Relationship data is required");
+    try {
+      const relationship = await relationshipServices.acceptRelationship(
+        id,
+        relationshipData
+      );
+      if (!relationship) {
+        res.status(200).json(`Accept relationship with id${id} failed`);
+      } else if (relationship) {
+        res.status(200).json("Accepted relationship request successfully");
+      } else throw new Error(`Accept relationship with id${id} failed`);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+relationshipRouter.delete(
   "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;
@@ -86,7 +120,7 @@ relationshipRouter.get(
       if (!relationship) {
         res.status(200).json(`Delete relationship with id${id} failed`);
       } else if (relationship) {
-        res.status(200).json(relationship);
+        res.status(200).json("Deleted relationship request successfully");
       } else throw new Error(`Delete relationship with id${id} failed`);
     } catch (err) {
       next(err);

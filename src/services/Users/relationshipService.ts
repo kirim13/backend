@@ -48,6 +48,18 @@ const updateRelationship = (id: string, relationshipData: Relationship) => {
   });
 };
 
+const acceptRelationship = (id: string, relationshipData: Relationship) => {
+  const { status, fromUserId, toUserId } = relationshipData;
+  return db.relationship.update({
+    where: { id },
+    data: {
+      status,
+      fromUserId,
+      toUserId,
+    },
+  });
+};
+
 const deleteRelationship = (id: string) => {
   return db.relationship.delete({
     where: { id },
@@ -59,5 +71,6 @@ export {
   getAllRelationships,
   getRelationship,
   updateRelationship,
+  acceptRelationship,
   deleteRelationship,
 };
