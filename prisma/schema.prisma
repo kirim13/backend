@@ -24,6 +24,10 @@ model User {
   weight Weight[]
   fromUserRelationships Relationship[] @relation("fromUser")
   toUserRelationships Relationship[] @relation("toUser")
+  user1 Room[] @relation("user1")
+  user2 Room[]@relation("user2")
+  fromUserMessages Message[] @relation("fromUser")
+  toUserMessages Message[] @relation("toUser")
 }
 
 model Pet {
@@ -179,11 +183,36 @@ model RegisteredWeight {
 
 model Relationship {
   id String @id @default(cuid())
-  status Status 
+  status RelationshipStatus 
   fromUserId String 
   fromUser User @relation("fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
   toUserId String 
   toUser User @relation("toUser", fields: [toUserId], references: [id], onDelete: Cascade)
+}
+
+model Room {
+  id String @id @default(cuid())
+  name String? 
+  user1Id String 
+  user1 User @relation("user1", fields: [user1Id], references: [id], onDelete: Cascade)
+  user2Id String 
+  user2 User @relation("user2", fields: [user2Id], references: [id], onDelete: Cascade)
+  messages Message[]
+}
+
+model Message {
+  id String @id @default(cuid())
+  status MessageStatus
+  title String? 
+  message String
+  photo String? 
+  createdAt DateTime @default(now())
+  fromUserId String 
+  fromUser User @relation("fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUserId String 
+  toUser User @relation("toUser", fields: [toUserId], references: [id], onDelete: Cascade)
+  roomId String 
+  room Room @relation(fields: [roomId], references: [id], onDelete: Cascade)
 }
 
 enum AppearanceMode {
@@ -252,10 +281,16 @@ enum FinanceType {
   MISC
 }
 
-enum Status {
+enum RelationshipStatus {
   PENDING 
   CONFIRMED 
   BLOCKED_TO
   BLOCKED_FROM
   BLOCKED_BOTH 
+}
+
+enum MessageStatus {
+  PENDING
+  SENT 
+  READ
 }
