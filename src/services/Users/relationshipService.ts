@@ -1,5 +1,5 @@
 import db from "../../utils/db.server";
-import { Relationship } from "../../types/relationshipTypes";
+import { Relationship } from "../../typings/relationship";
 
 const sendRelationshipRequest = (relationshipData: Relationship) => {
   const { status, fromUserId, toUserId } = relationshipData;

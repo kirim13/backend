@@ -1,5 +1,5 @@
 import db from "../../utils/db.server";
-import { Item } from "../../types/inventoryTypes";
+import { Item } from "@prisma/client";
 
 const createItem = async (itemData: Item) => {
   const { name, type } = itemData;

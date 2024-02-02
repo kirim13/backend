@@ -1,5 +1,6 @@
 import app from "./config/app";
 import env from "./utils/env.envalid";
+import configureServer from "./sockets/";
 
 const PORT = env.PORT;
 
@@ -9,6 +10,8 @@ app.listen(PORT, () => {
 });
 
 // Listening for web socket connections
-export const server = app.listen(Number(PORT) + 1, () => {
-  console.log(`Server listening on port: ${Number(PORT) + 1}`);
-});
+configureServer(
+  app.listen(Number(PORT) + 1, () => {
+    console.log(`Server listening on port: ${Number(PORT) + 1}`);
+  })
+);

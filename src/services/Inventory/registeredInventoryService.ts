@@ -1,5 +1,5 @@
 import db from "../../utils/db.server";
-import { RegisteredInventory } from "../../types/inventoryTypes";
+import { RegisteredInventory } from "../../typings/inventory";
 
 const getAllRegisteredInventory = () => {
   return db.registeredInventory.findMany({

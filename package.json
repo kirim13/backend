@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon src/socket",
-    "dev": "npx prisma generate && nodemon --files src/socket/socket.ts",
+    "start": "nodemon src/server",
+    "dev": "npx prisma generate && nodemon --files src/server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "image": "nodemon src/utils/upload.image"
   },
