@@ -3,6 +3,7 @@ import { Server } from "http";
 import cuid from "cuid";
 import PubSubManager from "./pubsub";
 import { users } from "../typings/subscription";
+import * as UserServices from "../services/Users/userService";
 
 const users: string[] = [];
 const rooms: Map<string, string[]> = new Map(); // room, ws array (users)
@@ -10,12 +11,28 @@ const roomsMessage: Map<string, string[]> = new Map();
 const messages: string[] = [];
 const pubSubManager = new PubSubManager();
 
+declare module "ws" {
+  interface WebSocket {
+    isAlive: boolean;
+    userEmail: string;
+  }
+}
+
 function onSocketPreError(e: Error) {
   console.log(e);
 }
 
 function onSocketPostError(e: Error) {
   console.log(e);
+}
+
+async function getUsersEmail(id: string) {
+  const user = await UserServices.getUser(id);
+  if (user) {
+    return user.email;
+  } else {
+    console.log(`Cannot find user with id: ${id}`);
+  }
 }
 
 // const HEARTBEAT_INTERVAL = 1000 * 20; // 20 seconds
@@ -41,11 +58,14 @@ export default function configure(server: Server) {
     });
   });
 
-  wss.on("connection", (ws: WebSocket) => {
+  wss.on("connection", async (ws: WebSocket) => {
     ws.isAlive = true;
     const userId = cuid();
-
+    const userEmail = await getUsersEmail("cls5uk5us0000gelocbybczzj");
     ws.send("Connection established");
+    if (userEmail) {
+      ws.userEmail = userEmail;
+    }
     users.push(userId);
     console.log(`New user: ${userId} connected`);
 
