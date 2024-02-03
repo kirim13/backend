@@ -2,15 +2,13 @@ import { WebSocketServer, WebSocket } from "ws";
 import { Server } from "http";
 import cuid from "cuid";
 import PubSubManager from "./pubsub";
+import { users } from "../typings/subscription";
 
 const users: string[] = [];
 const rooms: Map<string, string[]> = new Map(); // room, ws array (users)
 const roomsMessage: Map<string, string[]> = new Map();
 const messages: string[] = [];
 const pubSubManager = new PubSubManager();
-
-// const HEARTBEAT_INTERVAL = 1000 * 20; // 20 seconds
-// const HEARTBEAT_VALUE = 1;
 
 function onSocketPreError(e: Error) {
   console.log(e);
@@ -19,6 +17,9 @@ function onSocketPreError(e: Error) {
 function onSocketPostError(e: Error) {
   console.log(e);
 }
+
+// const HEARTBEAT_INTERVAL = 1000 * 20; // 20 seconds
+// const HEARTBEAT_VALUE = 1;
 
 /*
 function ping(ws: WebSocket) {
@@ -51,30 +52,43 @@ export default function configure(server: Server) {
     ws.on("error", onSocketPostError);
 
     ws.on("message", (data: string) => {
-      // , isBinary
-      // Include the client sending the message
       try {
         const json = JSON.parse(data);
-        const request = json.request;
-        const message = json.message;
-        const channel = json.channel;
-        wss.clients.forEach((client) => {
-          if (client.readyState === WebSocket.OPEN) {
-            switch (request) {
-              case "PUBLISH":
-                pubSubManager.publish(ws, channel, message);
-                messages.push(message);
-                break;
-              case "SUBSCRIBE":
-                pubSubManager.subscribe(ws, channel);
-                ws.isAlive = true;
-                break;
+        const { request, message, channel, isHost } = json;
+        const subscriber: users = { userId, subType: "TEXT", isHost };
+        //eslint-disable-next-line
+        let channelData: any;
+        switch (request) {
+          case "PUBLISH":
+            channelData = pubSubManager.publish(subscriber, channel, message);
+
+            if (channelData) {
+              let counter = 0;
+              wss.clients.forEach((client) => {
+                // Include the client sending the message
+                if (client.readyState === WebSocket.OPEN) {
+                  const subscriber = channelData.subscribers[counter++];
+                  const sentMessage = `${subscriber.userId}: ${message} SENT, ${channelData.createdAt}`;
+                  const receivedMessage = `${subscriber.userId}: ${message} RECEIVED, ${channelData.createdAt}`;
+                  if (subscriber.isHost === true) {
+                    client.send(sentMessage);
+                    messages.push(sentMessage);
+                  } else {
+                    client.send(receivedMessage);
+                    messages.push(receivedMessage);
+                  }
+                }
+              });
+            } else {
+              console.log("No active channel to publish");
             }
-          }
-          // (&& ws !== client) to not include client
-          // client.send(message, { binary: isBinary });
-          // messages.push(`${userId}: ${message}, ${createdAt}`);
-        });
+            break;
+
+          case "SUBSCRIBE":
+            pubSubManager.subscribe(subscriber, channel);
+            ws.isAlive = true;
+            break;
+        }
         rooms.set(channel, users);
         roomsMessage.set(channel, messages);
       } catch (err) {
