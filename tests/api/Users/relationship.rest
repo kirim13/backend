@@ -5,13 +5,24 @@ POST http://localhost:3001/relationships
 content-type: application/json
 
 {
-    "fromUserId": "clrwovsej0000dfv7t13tqj4l",
-    "toUserId": "clrxbk1730000ay6fxtsooys4"
+    "fromUserId": "cls5uk5us0000gelocbybczzj",
+    "toUserId": "cls8j6iik000113qoak8vgtxh"
 }
 
 ### Description: Get all relationships 
 ## Request 
 GET http://localhost:3001/relationships 
+
+### Description: Get all relationships 
+## Request 
+GET http://localhost:3001/relationships/status/
+## Response 
+content-type: application/json
+
+{
+    "status": "CONFIRMED"
+} 
+
 
 ### Description: Get relationship via id 
 ## Request 
@@ -19,4 +30,10 @@ GET http://localhost:3001/relationships/clrxbkho40002ay6fuuunnd62
 
 ### Description: Update relationship request 
 ## Request 
-PUT http://localhost:3001/relationships/accept/clrxbkho40002ay6fuuunnd62 
+PUT http://localhost:3001/relationships/accept/cls8j7p5f000313qooidof49v
+## Response 
+content-type: application/json
+
+{
+    "status": "CONFIRMED"
+} 

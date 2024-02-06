@@ -43,6 +43,25 @@ relationshipRouter.get(
 );
 
 relationshipRouter.get(
+  "/status/",
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { status } = req.body;
+      const relationships =
+        await relationshipServices.getAllRelationshipsViaStatus(status);
+      if (relationships.length === 0) {
+        res.status(200).json(`No Relationship with status: ${status} found`);
+      } else if (relationships) {
+        res.status(200).json(relationships);
+      } else
+        throw new Error(`Get all relationships with status: ${status} failed`);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+relationshipRouter.get(
   "/:id",
   async (req: Request, res: Response, next: NextFunction) => {
     const { id } = req.params;

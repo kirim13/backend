@@ -20,6 +20,8 @@ const listUsers = async (): Promise<User[]> => {
       createdAt: true,
       appearanceMode: true,
       pets: true,
+      toUserRelationships: true,
+      fromUserRelationships: true,
     },
   });
 };

@@ -14,7 +14,8 @@ const pubSubManager = new PubSubManager();
 declare module "ws" {
   interface WebSocket {
     isAlive: boolean;
-    userEmail: string;
+    userId: string;
+    userFirstName: string;
   }
 }
 
@@ -26,10 +27,10 @@ function onSocketPostError(e: Error) {
   console.log(e);
 }
 
-async function getUsersEmail(id: string) {
+async function getUsersFirstName(id: string) {
   const user = await UserServices.getUser(id);
   if (user) {
-    return user.email;
+    return user.firstName;
   } else {
     console.log(`Cannot find user with id: ${id}`);
   }
@@ -61,10 +62,10 @@ export default function configure(server: Server) {
   wss.on("connection", async (ws: WebSocket) => {
     ws.isAlive = true;
     const userId = cuid();
-    const userEmail = await getUsersEmail("cls5uk5us0000gelocbybczzj");
+    const userFirstName = await getUsersFirstName("cls5uk5us0000gelocbybczzj");
     ws.send("Connection established");
-    if (userEmail) {
-      ws.userEmail = userEmail;
+    if (userFirstName) {
+      ws.userFirstName = userFirstName;
     }
     users.push(userId);
     console.log(`New user: ${userId} connected`);

@@ -18,22 +18,22 @@ POST http://localhost:3001/users
 content-type: application/json
 
 {
-    "firstName": "Mary",
+    "firstName": "John",
     "lastName": "Smith",
-    "email": "johnsmith2@example.com",
+    "email": "johnsmith@example.com",
     "password": "password"
 }
 
 ### Description: Update user via id 
 ## Request 
-PUT http://localhost:3001/users/clriem4ix0000b5299oqa4ej3
+PUT http://localhost:3001/users/cls5uk5us0000gelocbybczzj
 ## Response
 content-type: application/json
 
 {
-    "firstName": "Joe",
+    "firstName": "Mary",
     "lastName": "Smith",
-    "email": "joesmith@example.com",
+    "email": "marysmith@example.com",
     "password": "password"
 }
 

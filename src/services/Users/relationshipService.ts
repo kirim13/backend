@@ -1,5 +1,6 @@
 import db from "../../utils/db.server";
 import { Relationship } from "../../typings/relationship";
+import { RelationshipStatus } from "@prisma/client";
 
 const sendRelationshipRequest = (relationshipData: Relationship) => {
   const { status, fromUserId, toUserId } = relationshipData;
@@ -14,6 +15,10 @@ const sendRelationshipRequest = (relationshipData: Relationship) => {
 
 const getAllRelationships = () => {
   return db.relationship.findMany({});
+};
+
+const getAllRelationshipsViaStatus = (status: RelationshipStatus) => {
+  return db.relationship.findMany({ where: { status } });
 };
 
 const getRelationship = (id: string) => {
@@ -49,13 +54,11 @@ const updateRelationship = (id: string, relationshipData: Relationship) => {
 };
 
 const acceptRelationship = (id: string, relationshipData: Relationship) => {
-  const { status, fromUserId, toUserId } = relationshipData;
+  const { status } = relationshipData;
   return db.relationship.update({
     where: { id },
     data: {
       status,
-      fromUserId,
-      toUserId,
     },
   });
 };
@@ -69,6 +72,7 @@ const deleteRelationship = (id: string) => {
 export {
   sendRelationshipRequest,
   getAllRelationships,
+  getAllRelationshipsViaStatus,
   getRelationship,
   updateRelationship,
   acceptRelationship,
