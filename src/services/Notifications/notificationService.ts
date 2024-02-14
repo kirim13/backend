@@ -1,11 +1,23 @@
 import db from "../../utils/db.server";
-import { NotificationType } from "@prisma/client";
+import { FrequencyUnit, Repeating } from "@prisma/client";
 
 type Notification = {
   name: string;
-  type: NotificationType;
+  type: string;
   quantity: number;
   unit: string;
+  notes: string;
+  files: string;
+  dosage_quantity: number;
+  dosage_unit: string;
+  frequency_quantity: number;
+  frequency_unit: FrequencyUnit;
+  dayOfTheWeek: string;
+  time: string;
+  end_date: string;
+  isRepeating: Repeating;
+  createdAt: string;
+  imageSrc: string;
 };
 
 const listNotifications = async () => {
@@ -29,13 +41,40 @@ const getNotification = async (id: string) => {
 };
 
 const createNotification = async (notification: Notification) => {
-  const { name, quantity, unit, type } = notification;
+  const {
+    name,
+    type,
+    quantity,
+    unit,
+    notes,
+    files,
+    dosage_quantity,
+    dosage_unit,
+    frequency_quantity,
+    frequency_unit,
+    dayOfTheWeek,
+    time,
+    end_date,
+    isRepeating,
+    imageSrc,
+  } = notification;
   return db.notification.create({
     data: {
       name,
       type,
       quantity,
       unit,
+      notes,
+      photos: files,
+      dosageQuantity: dosage_quantity,
+      dosageUnit: dosage_unit,
+      frequencyQuantity: frequency_quantity,
+      frequencyUnit: frequency_unit,
+      day: dayOfTheWeek,
+      time,
+      endDate: end_date,
+      repeating: isRepeating,
+      imageSrc,
     },
   });
 };

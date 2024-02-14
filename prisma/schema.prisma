@@ -41,6 +41,7 @@ model Pet {
   active         Boolean  @default(true)
   primaryOwnerId String?
   primaryOwner   User?     @relation(fields: [primaryOwnerId], references: [id], onDelete: Cascade)
+  notifications Notification[]
   registeredNotifications RegisteredNotification[] 
   registeredRecords RegisteredRecord[]
   registeredInventory RegisteredInventory[] 
@@ -50,15 +51,26 @@ model Pet {
 
 model Notification { 
   id String @id @default(cuid())
-  type NotificationType
+  type String
   name String 
   quantity Int 
   unit String 
-  notes Boolean @default(false)
+  notes String?
   photos String?
+  dosageQuantity Int?
+  dosageUnit String? 
+  frequencyQuantity Int?
+  frequencyUnit FrequencyUnit? 
+  day String? 
+  time String
+  endDate String? 
+  repeating Repeating? 
   createdAt DateTime @default(now())
+  imageSrc String?
   userId String? 
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
+  petId String? 
+  pet Pet? @relation(fields: [petId], references: [id], onDelete: Cascade)
   notificationDetails NotificationDetail[]
 }
 
@@ -231,27 +243,29 @@ enum TimeOfDay {
 }
 
 enum NotificationType {
-  MEDICINE
-  FOOD
-  WATER
+  Medicine 
+  Food 
+  Water
 }
 
 enum FrequencyUnit {
-  DAY 
-  WEEK 
-  BIWEEKLY 
-  MONTH
-  BIMONTHLY 
-  QUARTERLY
+  Daily
+  Days 
+  Weekly 
+  Biweekly
+  Weeks
+  Monthly
+  Bimonthly 
+  Months
+  Quarterly
 }
 
 enum Repeating {
-  DAILY
-  WEEKLY 
-  BIWEEKLY 
-  MONTHLY 
-  BIMONTHLY
-  QUARTERLY
+  Daily
+  Weekly 
+  Biweekly
+  Monthly
+  Quarterly
 }
 
 enum RecordType {

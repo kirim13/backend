@@ -40,6 +40,7 @@ notificationRouter.get(
 notificationRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
+    console.log("Hi from post req");
     const notification = req.body;
     try {
       const createdNotification = await notificationService.createNotification(

@@ -16,7 +16,17 @@ content-type: application/json
     "name": "Advil",
     "type": "MEDICINE",
     "quantity": 2,
-    "unit": "pills" 
+    "unit": "pills" ,
+    "notes": "",
+    "photos": "",
+    "dosageQuantity": "",
+    "dosageUnit": "undefined",
+    "frequencyQuantity": "undefined",
+    "frequencyUnit": "undefined",
+    "day": "undefined",
+    "endDate": "undefined",
+    "repeating": "undefined",
+    "time": "14:15"
 }
 
 ### Definition: Update notification via id
@@ -34,4 +44,4 @@ content-type: application/json
 
 ### Definition: Delete notification via id  
 ## Request 
-DELETE http://localhost:3001/notifications/clrlxjcm70000k59g43phb4oo
+DELETE http://localhost:3001/notifications/clsfisa8n0000vdcb1gvoxltk5
