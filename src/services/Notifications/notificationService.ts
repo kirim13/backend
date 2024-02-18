@@ -18,6 +18,8 @@ type Notification = {
   isRepeating: Repeating;
   createdAt: string;
   imageSrc: string;
+  userId: string;
+  petId: string;
 };
 
 const listNotifications = async () => {
@@ -28,6 +30,14 @@ const listNotifications = async () => {
       name: true,
       unit: true,
       notificationDetails: true,
+    },
+  });
+};
+
+const listNotificationsViaUserId = async (userId: string) => {
+  return db.notification.findMany({
+    where: {
+      userId,
     },
   });
 };
@@ -57,6 +67,8 @@ const createNotification = async (notification: Notification) => {
     end_date,
     isRepeating,
     imageSrc,
+    userId,
+    petId,
   } = notification;
   return db.notification.create({
     data: {
@@ -75,6 +87,8 @@ const createNotification = async (notification: Notification) => {
       endDate: end_date,
       repeating: isRepeating,
       imageSrc,
+      user: { connect: { id: userId } },
+      pet: { connect: { id: petId } },
     },
   });
 };
@@ -104,6 +118,7 @@ const deleteNotification = async (id: string) => {
 
 export {
   listNotifications,
+  listNotificationsViaUserId,
   getNotification,
   createNotification,
   updateNotification,

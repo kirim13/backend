@@ -67,6 +67,7 @@ model Notification {
   repeating Repeating? 
   createdAt DateTime @default(now())
   imageSrc String?
+  completed Boolean @default(false)
   userId String? 
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
   petId String? 

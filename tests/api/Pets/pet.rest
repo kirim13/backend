@@ -19,7 +19,7 @@ content-type: application/json
     "type": "CAT", 
     "birthday": "02-12-2013", 
     "gotchaDate": "02-12-2013", 
-    "primaryOwnerId": "clrwovsej0000dfv7t13tqj4l"
+    "primaryOwnerId": "clspfh9em00004ju0nwklyklg"
 }
 
 ### Description: Update pet via id 

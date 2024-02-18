@@ -2,9 +2,13 @@
 ## Request 
 GET http://localhost:3001/notifications
 
+### Definition: List all notifications via userId 
+## Request 
+GET http://localhost:3001/notifications/user/clspfh9em00004ju0nwklyklg
+
 ### Definition: List notification via id 
 ## Request 
-GET http://localhost:3001/notifications/clrml73zj0000gv0c3bzzwj0y
+GET http://localhost:3001/notifications/clspgzfu90003dmqvthrang2j
 
 ### Definition: Create notification  
 ## Request 
@@ -14,19 +18,21 @@ content-type: application/json
 
 {
     "name": "Advil",
-    "type": "MEDICINE",
+    "type": "Medicine",
     "quantity": 2,
     "unit": "pills" ,
     "notes": "",
     "photos": "",
-    "dosageQuantity": "",
-    "dosageUnit": "undefined",
-    "frequencyQuantity": "undefined",
-    "frequencyUnit": "undefined",
+    "dosageQuantity": "2",
+    "dosageUnit": "mg",
+    "frequencyQuantity": "2",
+    "frequencyUnit": "Daily",
     "day": "undefined",
     "endDate": "undefined",
     "repeating": "undefined",
-    "time": "14:15"
+    "time": "14:15",
+    "userId": "clspfh9em00004ju0nwklyklg",
+    "petId": "clspggxx80000xwjdlinq5by6"
 }
 
 ### Definition: Update notification via id
@@ -44,4 +50,4 @@ content-type: application/json
 
 ### Definition: Delete notification via id  
 ## Request 
-DELETE http://localhost:3001/notifications/clsfisa8n0000vdcb1gvoxltk5
+DELETE http://localhost:3001/notifications/clspflx5v00044ju0x4wyuzfb

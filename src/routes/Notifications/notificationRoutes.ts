@@ -18,6 +18,22 @@ notificationRouter.get(
   }
 );
 
+// GET: List Notifications
+notificationRouter.get(
+  "/user/:userId",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { userId } = req.params;
+    try {
+      const notifications =
+        await notificationService.listNotificationsViaUserId(userId);
+      return res.status(200).json(notifications);
+      //eslint-disable-next-line
+    } catch (err: any) {
+      next(err);
+    }
+  }
+);
+
 // GET: List Notification via ID
 notificationRouter.get(
   "/:id",
@@ -40,7 +56,6 @@ notificationRouter.get(
 notificationRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    console.log("Hi from post req");
     const notification = req.body;
     try {
       const createdNotification = await notificationService.createNotification(
