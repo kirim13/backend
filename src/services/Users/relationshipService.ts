@@ -25,13 +25,13 @@ const getRelationship = (id: string) => {
   return db.relationship.findUnique({
     where: { id },
     include: {
-      fromUser: {
+      toUser: {
         select: {
           firstName: true,
           lastName: true,
         },
       },
-      toUser: {
+      fromUser: {
         select: {
           firstName: true,
           lastName: true,
@@ -42,13 +42,13 @@ const getRelationship = (id: string) => {
 };
 
 const updateRelationship = (id: string, relationshipData: Relationship) => {
-  const { status, fromUserId, toUserId } = relationshipData;
+  const { status, toUserId, fromUserId } = relationshipData;
   return db.relationship.update({
     where: { id },
     data: {
       status,
-      fromUserId,
       toUserId,
+      fromUserId,
     },
   });
 };

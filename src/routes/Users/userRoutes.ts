@@ -34,6 +34,24 @@ userRouter.get(
   }
 );
 
+// GET: List User by ID
+userRouter.get(
+  "/username/:username",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const username: string = req.params.username;
+    try {
+      const user = await userService.getUserViaUsername(username);
+      if (user) {
+        return res.status(200).json(user);
+      }
+      throw Error(`Cannot find user with username:${username}`);
+      //eslint-disable-next-line
+    } catch (err: any) {
+      next(err);
+    }
+  }
+);
+
 // POST: Create a new User
 userRouter.post(
   "/",

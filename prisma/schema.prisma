@@ -9,6 +9,7 @@ datasource db {
 
 model User {
   id             String         @id @default(cuid())
+  username       String         @unique
   firstName      String
   lastName       String
   email          String         @unique
@@ -22,10 +23,10 @@ model User {
   inventory Inventory[]
   finance Finance[]
   weight Weight[]
-  fromUserRelationships Relationship[] @relation("fromUser")
   toUserRelationships Relationship[] @relation("toUser")
+  fromUserRelationships Relationship[] @relation("fromUser")
   user1 Room[] @relation("user1")
-  user2 Room[]@relation("user2")
+  user2 Room[] @relation("user2")
   fromUserMessages Message[] @relation("fromUser")
   toUserMessages Message[] @relation("toUser")
 }
@@ -197,10 +198,10 @@ model RegisteredWeight {
 model Relationship {
   id String @id @default(cuid())
   status RelationshipStatus 
-  fromUserId String 
-  fromUser User @relation("fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
   toUserId String 
   toUser User @relation("toUser", fields: [toUserId], references: [id], onDelete: Cascade)
+  fromUserId String 
+  fromUser User @relation("fromUser", fields: [fromUserId], references: [id], onDelete: Cascade)
 }
 
 model Room {

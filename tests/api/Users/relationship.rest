@@ -5,8 +5,8 @@ POST http://localhost:3001/relationships
 content-type: application/json
 
 {
-    "fromUserId": "cls5uk5us0000gelocbybczzj",
-    "toUserId": "cls8j6iik000113qoak8vgtxh"
+    "fromUserId": "clt9gy1zx0000tcmzs7g5q4vo",
+    "toUserId": "clt9gv5vx0000bo7rprjg9uaw"
 }
 
 ### Description: Get all relationships 
@@ -37,3 +37,7 @@ content-type: application/json
 {
     "status": "CONFIRMED"
 } 
+
+### Description: Update relationship request 
+## Request 
+DELETE http://localhost:3001/relationships/clt9sfly3000113bckc6es85s

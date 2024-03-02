@@ -6,20 +6,31 @@ type User = {
   lastName: string;
   email: string;
   password: string;
+  username: string;
 };
 
-const listUsers = async (): Promise<User[]> => {
+const listUsers = async () => {
   return db.user.findMany({
     select: {
       id: true,
+      username: true,
+      firstName: true,
+      lastName: true,
+      toUserRelationships: true,
+      fromUserRelationships: true,
+    },
+  });
+};
+
+const listActiveUsers = async (): Promise<User[]> => {
+  return db.user.findMany({
+    select: {
+      id: true,
+      username: true,
       firstName: true,
       lastName: true,
       email: true,
       password: true,
-      passwordMatch: true,
-      createdAt: true,
-      appearanceMode: true,
-      pets: true,
       toUserRelationships: true,
       fromUserRelationships: true,
     },
@@ -31,18 +42,25 @@ const getUser = async (id: string) => {
   return db.user.findUnique({
     where: { id },
     include: {
-      fromUserRelationships: true,
       toUserRelationships: true,
+      fromUserRelationships: true,
     },
   });
 };
 
+const getUserViaUsername = async (username: string) => {
+  return db.user.findUnique({
+    where: { username },
+  });
+};
+
 const createUser = async (user: Omit<User, "id">): Promise<User> => {
-  const { firstName, lastName, email, password } = user;
+  const { firstName, lastName, username, email, password } = user;
   return db.user.create({
     data: {
       firstName,
       lastName,
+      username,
       email,
       password,
     },
@@ -73,4 +91,13 @@ const deleteUser = async (id: string) => {
   });
 };
 
-export { User, listUsers, getUser, createUser, updateUser, deleteUser };
+export {
+  User,
+  listUsers,
+  listActiveUsers,
+  getUser,
+  getUserViaUsername,
+  createUser,
+  updateUser,
+  deleteUser,
+};
