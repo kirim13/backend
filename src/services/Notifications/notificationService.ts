@@ -8,10 +8,10 @@ type Notification = {
   unit: string;
   notes: string;
   files: string;
-  dosage_quantity: number;
-  dosage_unit: string;
-  frequency_quantity: number;
-  frequency_unit: FrequencyUnit;
+  dosageQuantity: number;
+  dosageUnit: string;
+  frequencyQuantity: number;
+  frequencyUnit: FrequencyUnit;
   dayOfTheWeek: string;
   time: string;
   end_date: string;
@@ -58,10 +58,10 @@ const createNotification = async (notification: Notification) => {
     unit,
     notes,
     files,
-    dosage_quantity,
-    dosage_unit,
-    frequency_quantity,
-    frequency_unit,
+    dosageQuantity,
+    dosageUnit,
+    frequencyQuantity,
+    frequencyUnit,
     dayOfTheWeek,
     time,
     end_date,
@@ -78,10 +78,10 @@ const createNotification = async (notification: Notification) => {
       unit,
       notes,
       photos: files,
-      dosageQuantity: dosage_quantity,
-      dosageUnit: dosage_unit,
-      frequencyQuantity: frequency_quantity,
-      frequencyUnit: frequency_unit,
+      dosageQuantity,
+      dosageUnit,
+      frequencyQuantity,
+      frequencyUnit,
       day: dayOfTheWeek,
       time,
       endDate: end_date,
@@ -94,7 +94,25 @@ const createNotification = async (notification: Notification) => {
 };
 
 const updateNotification = async (id: string, notification: Notification) => {
-  const { name, quantity, unit, type } = notification;
+  const {
+    name,
+    type,
+    quantity,
+    unit,
+    notes,
+    files,
+    dosageQuantity,
+    dosageUnit,
+    frequencyQuantity,
+    frequencyUnit,
+    dayOfTheWeek,
+    time,
+    end_date,
+    isRepeating,
+    imageSrc,
+    userId,
+    petId,
+  } = notification;
   return db.notification.update({
     where: {
       id,
@@ -104,6 +122,19 @@ const updateNotification = async (id: string, notification: Notification) => {
       type,
       quantity,
       unit,
+      notes,
+      photos: files,
+      dosageQuantity,
+      dosageUnit,
+      frequencyQuantity,
+      frequencyUnit,
+      day: dayOfTheWeek,
+      time,
+      endDate: end_date,
+      repeating: isRepeating,
+      imageSrc,
+      user: { connect: { id: userId } },
+      pet: { connect: { id: petId } },
     },
   });
 };

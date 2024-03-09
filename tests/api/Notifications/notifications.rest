@@ -4,7 +4,7 @@ GET http://localhost:3001/notifications
 
 ### Definition: List all notifications via userId 
 ## Request 
-GET http://localhost:3001/notifications/user/clspfh9em00004ju0nwklyklg
+GET http://localhost:3001/notifications/user/clte5s2lp0000st8dcrhqf8jt
 
 ### Definition: List notification via id 
 ## Request 
@@ -23,31 +23,43 @@ content-type: application/json
     "unit": "pills" ,
     "notes": "",
     "photos": "",
-    "dosageQuantity": "2",
+    "dosageQuantity": 2,
     "dosageUnit": "mg",
-    "frequencyQuantity": "2",
+    "frequencyQuantity": 2,
     "frequencyUnit": "Daily",
     "day": "undefined",
     "endDate": "undefined",
     "repeating": "undefined",
     "time": "14:15",
-    "userId": "clspfh9em00004ju0nwklyklg",
-    "petId": "clspggxx80000xwjdlinq5by6"
+    "userId": "clte5s2lp0000st8dcrhqf8jt",
+    "petId": "clte5y7f6000113wkfx3ujf4h"
 }
 
 ### Definition: Update notification via id
 ## Request 
-PUT http://localhost:3001/notifications/clrlb5jen0000t2gx0nmybncc
+PUT http://localhost:3001/notifications/cclte6e5a30002mm6f3sgcemgr
 ## Response 
 content-type: application/json
 
 {
-    "name": "Ibuprofen", 
-    "type": "MEDICINE",
+    "name": "Advil",
+    "type": "Medicine",
     "quantity": 2,
-    "unit": "tablets" 
+    "unit": "pills" ,
+    "notes": "",
+    "photos": "",
+    "dosageQuantity": "2",
+    "dosageUnit": "mg",
+    "frequencyQuantity": "2",
+    "frequencyUnit": "Daily",
+    "day": "",
+    "endDate": "",
+    "repeating": "Daily",
+    "time": "14:15",
+    "userId": "clte5s2lp0000st8dcrhqf8jt",
+    "petId": "clte5y7f6000113wkfx3ujf4h"
 }
 
 ### Definition: Delete notification via id  
 ## Request 
-DELETE http://localhost:3001/notifications/clspflx5v00044ju0x4wyuzfb
+DELETE http://localhost:3001/notifications/cltjghyc300011t2fv83cfxm2
