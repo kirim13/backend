@@ -16,8 +16,8 @@ const listUsers = async () => {
       username: true,
       firstName: true,
       lastName: true,
-      toUserRelationships: true,
-      fromUserRelationships: true,
+      userFriends: true,
+      friendUserFriends: true,
     },
   });
 };
@@ -31,8 +31,6 @@ const listActiveUsers = async (): Promise<User[]> => {
       lastName: true,
       email: true,
       password: true,
-      toUserRelationships: true,
-      fromUserRelationships: true,
     },
   });
 };
@@ -41,10 +39,7 @@ const listActiveUsers = async (): Promise<User[]> => {
 const getUser = async (id: string) => {
   return db.user.findUnique({
     where: { id },
-    include: {
-      toUserRelationships: true,
-      fromUserRelationships: true,
-    },
+    include: { userFriends: true, friendUserFriends: true },
   });
 };
 

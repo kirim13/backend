@@ -4,11 +4,11 @@ GET http://localhost:3001/users
 
 ### Description: Retrieve user via id 
 ## Request 
-GET http://localhost:3001/users/clt9gy1zx0000tcmzs7g5q4vo
+GET http://localhost:3001/users/clte5s2lp0000st8dcrhqf8jt
 
 ### Description: Retrieve user via username 
 ## Request 
-GET http://localhost:3001/users/username/marydeer
+GET http://localhost:3001/users/username/johnsmith1
 
 
 ### Description: Create user 
@@ -40,4 +40,4 @@ content-type: application/json
 
 ### Description: Delete user via id 
 ## Request
-DELETE http://localhost:3001/users/clrlbn1kk00004dkbptu7t9rm
+DELETE http://localhost:3001/users/clt9gv5vx0000bo7rprjg9uaw

@@ -2,13 +2,32 @@ import db from "../../utils/db.server";
 import { Relationship } from "../../typings/relationship";
 import { RelationshipStatus } from "@prisma/client";
 
-const sendRelationshipRequest = (relationshipData: Relationship) => {
-  const { status, fromUserId, toUserId } = relationshipData;
+const createRelationship = (relationshipData: Relationship) => {
+  const { status, userId, friendId, updatedAt } = relationshipData;
   return db.relationship.create({
     data: {
       status,
-      fromUserId,
-      toUserId,
+      user: { connect: { id: userId } },
+      friend: { connect: { id: friendId } },
+      updatedAt,
+    },
+  });
+};
+
+const upsertRelationship = (relationshipData: Relationship) => {
+  const { status, userId, friendId, updatedAt } = relationshipData;
+  return db.relationship.upsert({
+    where: {
+      userId,
+    },
+    create: {
+      status,
+      user: { connect: { id: userId } },
+      friend: { connect: { id: friendId } },
+      updatedAt,
+    },
+    update: {
+      status,
     },
   });
 };
@@ -21,60 +40,33 @@ const getAllRelationshipsViaStatus = (status: RelationshipStatus) => {
   return db.relationship.findMany({ where: { status } });
 };
 
-const getRelationship = (id: string) => {
+const getRelationship = (userId: string, friendId: string) => {
   return db.relationship.findUnique({
-    where: { id },
-    include: {
-      toUser: {
-        select: {
-          firstName: true,
-          lastName: true,
-        },
-      },
-      fromUser: {
-        select: {
-          firstName: true,
-          lastName: true,
-        },
+    where: {
+      relationshipId: {
+        userId,
+        friendId,
       },
     },
   });
 };
 
-const updateRelationship = (id: string, relationshipData: Relationship) => {
-  const { status, toUserId, fromUserId } = relationshipData;
-  return db.relationship.update({
-    where: { id },
-    data: {
-      status,
-      toUserId,
-      fromUserId,
-    },
-  });
-};
-
-const acceptRelationship = (id: string, relationshipData: Relationship) => {
-  const { status } = relationshipData;
-  return db.relationship.update({
-    where: { id },
-    data: {
-      status,
-    },
-  });
-};
-
-const deleteRelationship = (id: string) => {
+const deleteRelationship = (userId: string, friendId: string) => {
   return db.relationship.delete({
-    where: { id },
+    where: {
+      relationshipId: {
+        userId,
+        friendId,
+      },
+    },
   });
 };
 
 export {
-  sendRelationshipRequest,
+  createRelationship,
+  upsertRelationship,
   getAllRelationships,
   getAllRelationshipsViaStatus,
   getRelationship,
-  updateRelationship,
-  acceptRelationship,
   deleteRelationship,
 };

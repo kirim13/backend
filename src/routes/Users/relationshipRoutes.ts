@@ -6,19 +6,41 @@ export const relationshipRouter = express.Router();
 relationshipRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const relationshipData = req.body;
-    relationshipData.status = "PENDING";
-    if (!relationshipData) throw new Error("Relationship data is required");
+    const userId = req.body;
+    if (!userId) throw new Error("User id data is required");
     try {
-      const relationshipRequest =
-        await relationshipServices.sendRelationshipRequest(relationshipData);
-      if (relationshipRequest) {
+      const addedUser = await relationshipServices.createRelationship(userId);
+      if (addedUser) {
         res
           .status(200)
-          .json(`Sent request to id:${relationshipData.toUserId} successfully`);
+          .json(`Friend Request to user: ${userId.friendId} sent successfully`);
+      } else
+        throw new Error(`Friend Request to user: ${userId.friendId} failed`);
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+relationshipRouter.put(
+  "/",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const activeRelationshipData = req.body;
+    if (!activeRelationshipData)
+      throw new Error("Relational user data is required");
+    try {
+      const addedUser = await relationshipServices.upsertRelationship(
+        activeRelationshipData
+      );
+      if (addedUser) {
+        res
+          .status(200)
+          .json(
+            `Updated user: ${activeRelationshipData.userId} relationship successfully`
+          );
       } else
         throw new Error(
-          `Sent request to id:${relationshipData.toUserId} failed`
+          `Updated user: ${activeRelationshipData.userId} relationship failed`
         );
     } catch (err) {
       next(err);
@@ -62,67 +84,19 @@ relationshipRouter.get(
 );
 
 relationshipRouter.get(
-  "/:id",
+  "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
+    const ids = req.body;
     try {
-      const relationship = await relationshipServices.getRelationship(id);
+      const relationship = await relationshipServices.getRelationship(
+        ids.userId,
+        ids.friendId
+      );
       if (!relationship) {
-        res.status(200).json(`Get relationship with id${id} failed`);
+        res.status(200).json(`Get relationship failed`);
       } else if (relationship) {
         res.status(200).json(relationship);
-      } else throw new Error(`Get relationship with id${id} failed`);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
-
-relationshipRouter.put(
-  "/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    const relationshipData = req.body;
-    if (!id) throw new Error("Id is required");
-    if (!relationshipData) throw new Error("Relationship data is required");
-    try {
-      const relationship = await relationshipServices.updateRelationship(
-        id,
-        relationshipData
-      );
-      if (!relationship) {
-        res.status(200).json(`Update relationship with id${id} failed`);
-      } else if (relationship) {
-        res
-          .status(200)
-          .json(
-            `Updated relationship request to ${relationshipData.status} successfully`
-          );
-      } else throw new Error(`Update relationship with id${id} failed`);
-    } catch (err) {
-      next(err);
-    }
-  }
-);
-
-relationshipRouter.put(
-  "/accept/:id",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    const relationshipData = req.body;
-    relationshipData.status = "CONFIRMED";
-    if (!id) throw new Error("Id is required");
-    if (!relationshipData) throw new Error("Relationship data is required");
-    try {
-      const relationship = await relationshipServices.acceptRelationship(
-        id,
-        relationshipData
-      );
-      if (!relationship) {
-        res.status(200).json(`Accept relationship with id${id} failed`);
-      } else if (relationship) {
-        res.status(200).json("Accepted relationship request successfully");
-      } else throw new Error(`Accept relationship with id${id} failed`);
+      } else throw new Error(`Get relationship failed`);
     } catch (err) {
       next(err);
     }
@@ -130,17 +104,20 @@ relationshipRouter.put(
 );
 
 relationshipRouter.delete(
-  "/:id",
+  "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const { id } = req.params;
-    if (!id) throw new Error("Id is required");
+    const ids = req.body;
+    if (!ids) throw new Error("Ids are required");
     try {
-      const relationship = await relationshipServices.deleteRelationship(id);
+      const relationship = await relationshipServices.deleteRelationship(
+        ids.userId,
+        ids.friendId
+      );
       if (!relationship) {
-        res.status(200).json(`Delete relationship with id${id} failed`);
+        res.status(200).json(`Delete relationship failed`);
       } else if (relationship) {
         res.status(200).json("Deleted relationship request successfully");
-      } else throw new Error(`Delete relationship with id${id} failed`);
+      } else throw new Error(`Delete relationship failed`);
     } catch (err) {
       next(err);
     }

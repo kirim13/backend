@@ -1,12 +1,27 @@
-### Description: Send relationship request 
+### Description: Add user to relations
 ## Request 
 POST http://localhost:3001/relationships 
 ## Response 
 content-type: application/json
 
 {
-    "fromUserId": "clt9gy1zx0000tcmzs7g5q4vo",
-    "toUserId": "clt9gv5vx0000bo7rprjg9uaw"
+    "userId": "clte5s2lp0000st8dcrhqf8jt", 
+    "friendId": "clte5s2ly0001st8dmvgw34i0", 
+    "status": "PENDING",
+    "updatedAt": "1997-07-16T19:20:30.451Z"
+}
+
+### Description: Update user relationships
+## Request 
+PUT http://localhost:3001/relationships 
+## Response 
+content-type: application/json
+
+{
+    "userId": "clte5s2lp0000st8dcrhqf8jt", 
+    "friendId": "clte5s2ly0001st8dmvgw34i0", 
+    "status": "CONFIRMED",
+    "updatedAt": "1997-07-16T19:20:30.451Z"
 }
 
 ### Description: Get all relationships 
@@ -26,18 +41,14 @@ content-type: application/json
 
 ### Description: Get relationship via id 
 ## Request 
-GET http://localhost:3001/relationships/clrxbkho40002ay6fuuunnd62
+GET http://localhost:3001/relationships/cltkruw4j0003cuamhbog2zcm
 
-### Description: Update relationship request 
+### Description: Delete relationship
 ## Request 
-PUT http://localhost:3001/relationships/accept/cls8j7p5f000313qooidof49v
-## Response 
+DELETE http://localhost:3001/relationships/
 content-type: application/json
 
 {
-    "status": "CONFIRMED"
-} 
-
-### Description: Update relationship request 
-## Request 
-DELETE http://localhost:3001/relationships/clt9sfly3000113bckc6es85s
+    "userId": "clte5s2lp0000st8dcrhqf8jt", 
+    "friendId": "clte5s2ly0001st8dmvgw34i0" 
+}

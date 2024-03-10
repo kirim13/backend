@@ -1,9 +1,10 @@
 import { RelationshipStatus } from "@prisma/client";
 
-interface Relationship {
+type Relationship = {
+  userId: string;
+  friendId: string;
   status: RelationshipStatus;
-  toUserId: string;
-  fromUserId: string;
-}
+  updatedAt: DateTime;
+};
 
 export { Relationship };
