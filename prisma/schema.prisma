@@ -62,10 +62,10 @@ model Notification {
   dosageUnit String? 
   frequencyQuantity Int?
   frequencyUnit FrequencyUnit? 
-  day String? 
-  time String
-  endDate String? 
-  repeating Repeating? 
+  day String[] 
+  time String[]
+  endDate String[] 
+  repeating Repeating[] 
   createdAt DateTime @default(now())
   imageSrc String?
   completed Boolean @default(false)
