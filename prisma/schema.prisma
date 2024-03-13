@@ -63,9 +63,9 @@ model Notification {
   frequencyQuantity Int?
   frequencyUnit FrequencyUnit? 
   day String[] 
-  time String[]
+  time String[] 
   endDate String[] 
-  repeating Repeating[] 
+  repeating String[] 
   createdAt DateTime @default(now())
   imageSrc String?
   completed Boolean @default(false)
