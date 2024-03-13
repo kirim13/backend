@@ -13,12 +13,12 @@ POST http://localhost:3001/pets
 content-type: application/json
 
 {
-    "firstName": "Cocoa", 
+    "firstName": "Toasty", 
     "lastName": "Smithy", 
-    "breed": "Orange Tabby", 
+    "breed": "Bengal", 
     "type": "CAT", 
-    "birthday": "01-1-2001", 
-    "gotchaDate": "12-19-2010", 
+    "birthday": "02-12-2013", 
+    "gotchaDate": "02-12-2013", 
     "primaryOwnerId": "clte5s2lp0000st8dcrhqf8jt"
 }
 

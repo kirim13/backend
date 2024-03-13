@@ -1,5 +1,13 @@
-import { User } from "../../typings/user";
 import db from "../../utils/db.server";
+
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  username: string;
+};
 
 const listUsers = async () => {
   return db.user.findMany({
@@ -10,19 +18,6 @@ const listUsers = async () => {
       lastName: true,
       userFriends: true,
       friendUserFriends: true,
-      pets: {
-        select: {
-          firstName: true,
-          lastName: true,
-          type: true,
-          notifications: {
-            select: {
-              id: true,
-              type: true,
-            },
-          },
-        },
-      },
     },
   });
 };
@@ -44,53 +39,13 @@ const listActiveUsers = async (): Promise<User[]> => {
 const getUser = async (id: string) => {
   return db.user.findUnique({
     where: { id },
-    select: {
-      username: true,
-      firstName: true,
-      lastName: true,
-      userFriends: true,
-      friendUserFriends: true,
-      pets: {
-        select: {
-          firstName: true,
-          lastName: true,
-          type: true,
-          notifications: {
-            select: {
-              id: true,
-              type: true,
-            },
-          },
-        },
-      },
-    },
+    include: { userFriends: true, friendUserFriends: true },
   });
 };
 
 const getUserViaUsername = async (username: string) => {
   return db.user.findUnique({
     where: { username },
-  });
-};
-
-const getNotificationViaPetsFullName = async (
-  username: string,
-  firstName: string,
-  lastName: string
-) => {
-  return db.user.findUnique({
-    where: { username },
-    select: {
-      pets: {
-        where: {
-          firstName,
-          lastName,
-        },
-        select: {
-          notifications: true,
-        },
-      },
-    },
   });
 };
 
@@ -132,11 +87,11 @@ const deleteUser = async (id: string) => {
 };
 
 export {
+  User,
   listUsers,
   listActiveUsers,
   getUser,
   getUserViaUsername,
-  getNotificationViaPetsFullName,
   createUser,
   updateUser,
   deleteUser,

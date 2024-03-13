@@ -12,10 +12,10 @@ type Notification = {
   dosageUnit: string;
   frequencyQuantity: number;
   frequencyUnit: FrequencyUnit;
-  day: string[];
-  time: string[];
-  endDate: string[];
-  repeating: Repeating[];
+  dayOfTheWeek: string;
+  time: string;
+  end_date: string;
+  isRepeating: Repeating;
   createdAt: string;
   imageSrc: string;
   userId: string;
@@ -62,10 +62,10 @@ const createNotification = async (notification: Notification) => {
     dosageUnit,
     frequencyQuantity,
     frequencyUnit,
-    day,
+    dayOfTheWeek,
     time,
-    endDate,
-    repeating,
+    end_date,
+    isRepeating,
     imageSrc,
     userId,
     petId,
@@ -82,10 +82,10 @@ const createNotification = async (notification: Notification) => {
       dosageUnit,
       frequencyQuantity,
       frequencyUnit,
-      day,
+      day: dayOfTheWeek,
       time,
-      endDate,
-      repeating,
+      endDate: end_date,
+      repeating: isRepeating,
       imageSrc,
       user: { connect: { id: userId } },
       pet: { connect: { id: petId } },
@@ -105,10 +105,10 @@ const updateNotification = async (id: string, notification: Notification) => {
     dosageUnit,
     frequencyQuantity,
     frequencyUnit,
-    day,
+    dayOfTheWeek,
     time,
-    endDate,
-    repeating,
+    end_date,
+    isRepeating,
     imageSrc,
     userId,
     petId,
@@ -128,10 +128,10 @@ const updateNotification = async (id: string, notification: Notification) => {
       dosageUnit,
       frequencyQuantity,
       frequencyUnit,
-      day,
+      day: dayOfTheWeek,
       time,
-      endDate,
-      repeating,
+      endDate: end_date,
+      repeating: isRepeating,
       imageSrc,
       user: { connect: { id: userId } },
       pet: { connect: { id: petId } },

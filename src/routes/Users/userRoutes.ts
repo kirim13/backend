@@ -52,30 +52,6 @@ userRouter.get(
   }
 );
 
-// GET: List Pet Notification by User ID
-userRouter.get(
-  "/petData/:username/:firstname/:lastname",
-  async (req: Request, res: Response, next: NextFunction) => {
-    const username: string = req.params.username;
-    const firstName = req.params.firstname;
-    const lastName = req.params.lastname;
-    try {
-      const user = await userService.getNotificationViaPetsFullName(
-        username,
-        firstName,
-        lastName
-      );
-      if (user) {
-        return res.status(200).json(user);
-      }
-      throw Error(`Cannot find user with username:${username}`);
-      //eslint-disable-next-line
-    } catch (err: any) {
-      next(err);
-    }
-  }
-);
-
 // POST: Create a new User
 userRouter.post(
   "/",
