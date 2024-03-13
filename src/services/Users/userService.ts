@@ -1,13 +1,5 @@
+import { User } from "../../typings/user";
 import db from "../../utils/db.server";
-
-type User = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  username: string;
-};
 
 const listUsers = async () => {
   return db.user.findMany({
@@ -18,6 +10,19 @@ const listUsers = async () => {
       lastName: true,
       userFriends: true,
       friendUserFriends: true,
+      pets: {
+        select: {
+          firstName: true,
+          lastName: true,
+          type: true,
+          notifications: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
+        },
+      },
     },
   });
 };
@@ -35,17 +40,55 @@ const listActiveUsers = async (): Promise<User[]> => {
   });
 };
 
-//: Promise<object | null>
 const getUser = async (id: string) => {
   return db.user.findUnique({
     where: { id },
-    include: { userFriends: true, friendUserFriends: true },
+    select: {
+      username: true,
+      firstName: true,
+      lastName: true,
+      userFriends: true,
+      friendUserFriends: true,
+      pets: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          type: true,
+          notifications: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
+        },
+      },
+    },
   });
 };
 
 const getUserViaUsername = async (username: string) => {
   return db.user.findUnique({
     where: { username },
+  });
+};
+
+const getNotificationViaPetsFullName = async (
+  username: string,
+  petId: string
+) => {
+  return db.user.findUnique({
+    where: { username },
+    select: {
+      pets: {
+        where: {
+          id: petId,
+        },
+        select: {
+          notifications: true,
+        },
+      },
+    },
   });
 };
 
@@ -92,6 +135,7 @@ export {
   listActiveUsers,
   getUser,
   getUserViaUsername,
+  getNotificationViaPetsFullName,
   createUser,
   updateUser,
   deleteUser,

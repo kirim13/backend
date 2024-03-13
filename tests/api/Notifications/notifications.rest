@@ -8,7 +8,7 @@ GET http://localhost:3001/notifications/user/clte5s2lp0000st8dcrhqf8jt
 
 ### Definition: List notification via id 
 ## Request 
-GET http://localhost:3001/notifications/clspgzfu90003dmqvthrang2j
+GET http://localhost:3001/notifications/cltqepwj00000cmmqwpfoktjj
 
 ### Definition: Create notification  
 ## Request 
