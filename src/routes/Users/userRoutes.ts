@@ -43,8 +43,7 @@ userRouter.get(
       const user = await userService.getUserViaUsername(username);
       if (user) {
         return res.status(200).json(user);
-      }
-      throw Error(`Cannot find user with username:${username}`);
+      } else throw new Error(`Cannot find user with username:${username}`);
       //eslint-disable-next-line
     } catch (err: any) {
       next(err);

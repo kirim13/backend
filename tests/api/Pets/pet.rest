@@ -13,13 +13,13 @@ POST http://localhost:3001/pets
 content-type: application/json
 
 {
-    "firstName": "Toasty", 
+    "firstName": "Felix", 
     "lastName": "Smithy", 
-    "breed": "Bengal", 
-    "type": "CAT", 
+    "breed": "Pug", 
+    "type": "DOG", 
     "birthday": "02-12-2013", 
     "gotchaDate": "02-12-2013", 
-    "primaryOwnerId": "clte5s2lp0000st8dcrhqf8jt"
+    "primaryOwnerId": "clte5s2ly0001st8dmvgw34i0"
 }
 
 ### Description: Update pet via id 

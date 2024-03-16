@@ -52,3 +52,16 @@ content-type: application/json
     "userId": "clte5s2lp0000st8dcrhqf8jt", 
     "friendId": "clte5s2ly0001st8dmvgw34i0" 
 }
+
+### Description: Delete relationship
+## Request 
+DELETE http://localhost:3001/relationships/
+content-type: application/json
+
+{
+    "userId": "clte5s2ly0001st8dmvgw34i0", 
+    "friendId": "clte5s2lp0000st8dcrhqf8jt" 
+}
+
+## clte5s2lp0000st8dcrhqf8jt
+## clte5s2ly0001st8dmvgw34i0

@@ -14,20 +14,16 @@ const createRelationship = (relationshipData: Relationship) => {
   });
 };
 
-const upsertRelationship = (relationshipData: Relationship) => {
+const updateRelationship = (relationshipData: Relationship) => {
   const { status, userId, friendId, updatedAt } = relationshipData;
-  return db.relationship.upsert({
+  return db.relationship.update({
     where: {
-      userId,
+      userId: friendId || userId,
+      friendId: userId || friendId,
     },
-    create: {
+    data: {
       status,
-      user: { connect: { id: userId } },
-      friend: { connect: { id: friendId } },
       updatedAt,
-    },
-    update: {
-      status,
     },
   });
 };
@@ -54,17 +50,15 @@ const getRelationship = (userId: string, friendId: string) => {
 const deleteRelationship = (userId: string, friendId: string) => {
   return db.relationship.delete({
     where: {
-      relationshipId: {
-        userId,
-        friendId,
-      },
+      userId: userId || friendId,
+      friendId: friendId || userId,
     },
   });
 };
 
 export {
   createRelationship,
-  upsertRelationship,
+  updateRelationship,
   getAllRelationships,
   getAllRelationshipsViaStatus,
   getRelationship,

@@ -95,6 +95,28 @@ notificationRouter.put(
   }
 );
 
+// PUT: Update Notification's Checked via ID
+notificationRouter.put(
+  "/completed/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const notification = req.body;
+    try {
+      const updatedNotification =
+        await notificationService.updateNotificationCompleted(id, notification);
+      if (updatedNotification) {
+        return res
+          .status(200)
+          .json(`Update notification ${updatedNotification.name} successfully`);
+      }
+      throw new Error(`Update notification ${notification.name} failed`);
+      //eslint-disable-next-line
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
 // Delete: Delete Notification via ID
 notificationRouter.delete(
   "/:id",

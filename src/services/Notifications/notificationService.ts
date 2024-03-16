@@ -1,26 +1,5 @@
+import { Notification } from "../../typings/notification";
 import db from "../../utils/db.server";
-import { FrequencyUnit, Repeating } from "@prisma/client";
-
-type Notification = {
-  name: string;
-  type: string;
-  quantity: number;
-  unit: string;
-  notes: string;
-  files: string;
-  dosageQuantity: number;
-  dosageUnit: string;
-  frequencyQuantity: number;
-  frequencyUnit: FrequencyUnit;
-  day: string[];
-  time: string[];
-  endDate: string[];
-  repeating: Repeating[];
-  createdAt: string;
-  imageSrc: string;
-  userId: string;
-  petId: string;
-};
 
 const listNotifications = async () => {
   return db.notification.findMany({
@@ -139,6 +118,21 @@ const updateNotification = async (id: string, notification: Notification) => {
   });
 };
 
+const updateNotificationCompleted = async (
+  id: string,
+  notification: Notification
+) => {
+  const { completed } = notification;
+  return db.notification.update({
+    where: {
+      id,
+    },
+    data: {
+      completed,
+    },
+  });
+};
+
 const deleteNotification = async (id: string) => {
   return db.notification.delete({
     where: {
@@ -153,5 +147,6 @@ export {
   getNotification,
   createNotification,
   updateNotification,
+  updateNotificationCompleted,
   deleteNotification,
 };

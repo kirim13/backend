@@ -8,11 +8,11 @@ GET http://localhost:3001/users/clte5s2lp0000st8dcrhqf8jt
 
 ### Description: Retrieve user via username 
 ## Request 
-GET http://localhost:3001/users/username/johnsmith1
+GET http://localhost:3001/users/username/marysmith1
 
 ### Description: Retrieve pet notification via pet's id
 ## Request 
-GET http://localhost:3001/users/petData/johnsmith1/
+GET http://localhost:3001/users/petData/marysmith1/
 
 ### Description: Create user 
 ## Request 

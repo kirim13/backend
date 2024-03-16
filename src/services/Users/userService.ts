@@ -44,6 +44,7 @@ const getUser = async (id: string) => {
   return db.user.findUnique({
     where: { id },
     select: {
+      id: true,
       username: true,
       firstName: true,
       lastName: true,
@@ -70,6 +71,28 @@ const getUser = async (id: string) => {
 const getUserViaUsername = async (username: string) => {
   return db.user.findUnique({
     where: { username },
+    select: {
+      id: true,
+      username: true,
+      firstName: true,
+      lastName: true,
+      userFriends: true,
+      friendUserFriends: true,
+      pets: {
+        select: {
+          id: true,
+          firstName: true,
+          lastName: true,
+          type: true,
+          notifications: {
+            select: {
+              id: true,
+              type: true,
+            },
+          },
+        },
+      },
+    },
   });
 };
 

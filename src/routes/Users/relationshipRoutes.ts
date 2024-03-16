@@ -6,16 +6,18 @@ export const relationshipRouter = express.Router();
 relationshipRouter.post(
   "/",
   async (req: Request, res: Response, next: NextFunction) => {
-    const userId = req.body;
-    if (!userId) throw new Error("User id data is required");
+    const userData = req.body;
+    if (!userData) throw new Error("User data is required");
     try {
-      const addedUser = await relationshipServices.createRelationship(userId);
+      const addedUser = await relationshipServices.createRelationship(userData);
       if (addedUser) {
         res
           .status(200)
-          .json(`Friend Request to user: ${userId.friendId} sent successfully`);
+          .json(
+            `Friend Request to user: ${userData.friendId} sent successfully`
+          );
       } else
-        throw new Error(`Friend Request to user: ${userId.friendId} failed`);
+        throw new Error(`Friend Request to user: ${userData.friendId} failed`);
     } catch (err) {
       next(err);
     }
@@ -29,7 +31,7 @@ relationshipRouter.put(
     if (!activeRelationshipData)
       throw new Error("Relational user data is required");
     try {
-      const addedUser = await relationshipServices.upsertRelationship(
+      const addedUser = await relationshipServices.updateRelationship(
         activeRelationshipData
       );
       if (addedUser) {

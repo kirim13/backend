@@ -43,7 +43,6 @@ model Pet {
   primaryOwnerId String?
   primaryOwner   User?     @relation(fields: [primaryOwnerId], references: [id], onDelete: Cascade)
   notifications Notification[]
-  registeredNotifications RegisteredNotification[] 
   registeredRecords RegisteredRecord[]
   registeredInventory RegisteredInventory[] 
   registeredFinance RegisteredFinance[]
@@ -73,40 +72,6 @@ model Notification {
   user User? @relation(fields: [userId], references: [id], onDelete: Cascade)
   petId String? 
   pet Pet? @relation(fields: [petId], references: [id], onDelete: Cascade)
-  notificationDetails NotificationDetail[]
-}
-
-model NotificationDetail { 
-  id String @id @default(cuid())
-  dosageQuantity Int?
-  dosageUnit String? 
-  frequencyQuantity Int
-  frequencyUnit FrequencyUnit 
-  notificationId String? 
-  notification Notification? @relation(fields: [notificationId], references: [id], onDelete: Cascade)
-  notificationSchedules NotificationSchedule[]
-}
-
-model NotificationSchedule {
-  id String @id @default(cuid())
-  day String? 
-  hour Int
-  minute Int
-  timeOfDay TimeOfDay
-  endDate String? 
-  repeating Repeating? 
-  createdAt DateTime @default(now())
-  notificationDetailId String? 
-  notificationDetails NotificationDetail? @relation(fields: [notificationDetailId], references: [id], onDelete: Cascade)
-  registeredNotifications RegisteredNotification[] 
-} 
-
-model RegisteredNotification {
-  id String @id @default(cuid())
-  petId String 
-  pet Pet @relation(fields: [petId], references: [id], onDelete: Cascade)
-  notificationScheduleId String 
-  notificationSchedules NotificationSchedule @relation(fields: [notificationScheduleId], references: [id], onDelete: Cascade)
 }
 
 model Record {
