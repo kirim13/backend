@@ -8,7 +8,6 @@ const listNotifications = async () => {
       type: true,
       name: true,
       unit: true,
-      notificationDetails: true,
     },
   });
 };
