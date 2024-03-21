@@ -11,9 +11,10 @@ type Notification = {
   dosageUnit: string;
   frequencyQuantity: number;
   frequencyUnit: FrequencyUnit;
+  date: string;
   day: string[];
   time: string[];
-  endDate: string[];
+  endDate: string;
   repeating: Repeating[];
   createdAt: string;
   imageSrc: string;

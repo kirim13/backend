@@ -71,6 +71,31 @@ notificationRouter.post(
   }
 );
 
+// PUT: Upsert Notification via ID
+notificationRouter.put(
+  "/:id",
+  async (req: Request, res: Response, next: NextFunction) => {
+    const { id } = req.params;
+    const notification = req.body;
+    try {
+      const updatedNotification = await notificationService.upsertNotification(
+        id,
+        notification
+      );
+      if (updatedNotification) {
+        return res
+          .status(200)
+          .json(`Update notification ${updatedNotification.name} successfully`);
+      }
+      throw new Error(`Update notification ${notification.name} failed`);
+      //eslint-disable-next-line
+    } catch (err) {
+      next(err);
+    }
+  }
+);
+
+/*
 // PUT: Update Notification via ID
 notificationRouter.put(
   "/:id",
@@ -94,6 +119,7 @@ notificationRouter.put(
     }
   }
 );
+*/
 
 // PUT: Update Notification's Checked via ID
 notificationRouter.put(

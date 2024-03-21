@@ -6,7 +6,8 @@
     "start": "nodemon src/server",
     "dev": "npx prisma generate && nodemon --files src/server",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "image": "nodemon src/utils/upload.image"
+    "image": "nodemon src/utils/upload.image",
+    "reset": "npx prisma migrate reset"
   },
   "author": "Kirim Lee",
   "license": "MIT",

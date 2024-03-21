@@ -1,0 +1,3 @@
+-- AlterTable
+ALTER TABLE "Notification" ALTER COLUMN "endDate" SET NOT NULL,
+ALTER COLUMN "endDate" SET DATA TYPE TEXT;

@@ -1,33 +1,5 @@
+import { PetOwner, ShortPet } from "../../typings/pet";
 import db from "../../utils/db.server";
-import { PetType } from "@prisma/client";
-
-// Format: MM/DD/YYYY
-const date: Date = new Date();
-const formattedDate: string = date.toLocaleDateString("en-US", {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
-
-type ShortPet = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  breed: string;
-  type: PetType;
-};
-
-type PetOwner = {
-  id: string;
-  firstName: string;
-  lastName: string;
-  breed: string;
-  type: PetType;
-  birthday: typeof formattedDate;
-  gotchaDate: typeof formattedDate;
-  active: boolean;
-  primaryOwnerId: string;
-};
 
 const listPets = async (): Promise<ShortPet[]> => {
   return db.pet.findMany({
